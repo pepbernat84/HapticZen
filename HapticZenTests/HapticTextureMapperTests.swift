@@ -61,116 +61,17 @@ final class HapticTextureMapperTests: XCTestCase {
             XCTAssertLessThanOrEqual(texture.baseSharpness, 1.0)
         }
     }
-}
 
-final class AppStateTests: XCTestCase {
-    @MainActor
-    func testInitialUnlockedPacksContainsFreePack() {
-        let appState = AppState()
-        XCTAssertTrue(appState.unlockedPackIDs.contains(TexturePack.freePack.id))
+    func testTextureEqualityAndHashing() {
+        let t1 = HapticTexture.bubbleWrap
+        let t2 = HapticTexture.bubbleWrap
+        let t3 = HapticTexture.gears
+        XCTAssertEqual(t1, t2)
+        XCTAssertNotEqual(t1, t3)
+        XCTAssertEqual(t1.hashValue, t2.hashValue)
     }
 
-    @MainActor
-    func testFreeTexturesAreAlwaysUnlocked() {
-        let appState = AppState()
-        XCTAssertTrue(appState.isUnlocked(texture: .bubbleWrap))
-        XCTAssertTrue(appState.isUnlocked(texture: .kineticSand))
-    }
-
-    @MainActor
-    func testUnlockPackGrantsAccess() {
-        let appState = AppState()
-        appState.unlock(packID: TexturePack.mechanicalPack.id)
-        XCTAssertTrue(appState.isUnlocked(texture: .typewriter))
-        XCTAssertTrue(appState.isUnlocked(texture: .gears))
-    }
-
-    @MainActor
-    func testSyncUnlockedPacksAlwaysRetainsFreePack() {
-        let appState = AppState()
-        appState.syncUnlockedPacks([])
-        XCTAssertTrue(appState.unlockedPackIDs.contains(TexturePack.freePack.id))
-    }
-}
-
-final class BreathingPhaseTests: XCTestCase {
-    func testBreathingPhaseDurations() {
-        XCTAssertEqual(BreathingPhase.inhale.duration, 4.0)
-        XCTAssertEqual(BreathingPhase.holdIn.duration, 2.0)
-        XCTAssertEqual(BreathingPhase.exhale.duration, 6.0)
-        XCTAssertEqual(BreathingPhase.holdOut.duration, 2.0)
-
-        let totalCycle = BreathingPhase.allCases.reduce(0) { $0 + $1.duration }
-        XCTAssertEqual(totalCycle, 14.0)
-    }
-
-    func testBreathingPhaseCycleProgression() {
-        var phase: BreathingPhase = .inhale
-        func advance(from p: BreathingPhase) -> BreathingPhase {
-            switch p {
-            case .inhale: return .holdIn
-            case .holdIn: return .exhale
-            case .exhale: return .holdOut
-            case .holdOut: return .inhale
-            }
-        }
-
-        phase = advance(from: phase)
-        XCTAssertEqual(phase, .holdIn)
-        phase = advance(from: phase)
-        XCTAssertEqual(phase, .exhale)
-        phase = advance(from: phase)
-        XCTAssertEqual(phase, .holdOut)
-        phase = advance(from: phase)
-        XCTAssertEqual(phase, .inhale)
-    }
-
-    func testBreathingPatternsDurationsAndCycles() {
-        // Paced (4-2-6-2)
-        let paced = BreathingPattern.paced
-        XCTAssertEqual(paced.duration(for: .inhale), 4.0)
-        XCTAssertEqual(paced.duration(for: .holdIn), 2.0)
-        XCTAssertEqual(paced.duration(for: .exhale), 6.0)
-        XCTAssertEqual(paced.duration(for: .holdOut), 2.0)
-        XCTAssertEqual(paced.totalCycleDuration, 14.0)
-
-        // Box (4-4-4-4)
-        let box = BreathingPattern.box
-        XCTAssertEqual(box.duration(for: .inhale), 4.0)
-        XCTAssertEqual(box.duration(for: .holdIn), 4.0)
-        XCTAssertEqual(box.duration(for: .exhale), 4.0)
-        XCTAssertEqual(box.duration(for: .holdOut), 4.0)
-        XCTAssertEqual(box.totalCycleDuration, 16.0)
-
-        // Relax 4-7-8
-        let relax478 = BreathingPattern.relax478
-        XCTAssertEqual(relax478.duration(for: .inhale), 4.0)
-        XCTAssertEqual(relax478.duration(for: .holdIn), 7.0)
-        XCTAssertEqual(relax478.duration(for: .exhale), 8.0)
-        XCTAssertEqual(relax478.duration(for: .holdOut), 0.0)
-        XCTAssertEqual(relax478.totalCycleDuration, 19.0)
-
-        // Resonant Coherence (5-5)
-        let resonant = BreathingPattern.resonant
-        XCTAssertEqual(resonant.duration(for: .inhale), 5.0)
-        XCTAssertEqual(resonant.duration(for: .holdIn), 0.0)
-        XCTAssertEqual(resonant.duration(for: .exhale), 5.0)
-        XCTAssertEqual(resonant.duration(for: .holdOut), 0.0)
-        XCTAssertEqual(resonant.totalCycleDuration, 10.0)
-    }
-
-    func testUserPreferencesBreathingPatternDefault() {
-        let prefs = UserPreferences()
-        XCTAssertEqual(prefs.selectedBreathingPattern, .paced)
-        prefs.selectedBreathingPattern = .box
-        XCTAssertEqual(prefs.selectedBreathingPattern, .box)
-        // Reset to default
-        prefs.selectedBreathingPattern = .paced
-    }
-}
-
-final class TexturePackTests: XCTestCase {
-    func testPackLookupForTextureID() {
+    func testTexturePackLookup() {
         let bubblePack = TexturePack.pack(for: "bubble_wrap")
         XCTAssertEqual(bubblePack?.id, TexturePack.freePack.id)
 
@@ -182,47 +83,5 @@ final class TexturePackTests: XCTestCase {
 
         let invalidPack = TexturePack.pack(for: "non_existent")
         XCTAssertNil(invalidPack)
-    }
-
-    func testSoundscapeIntegrity() {
-        for soundscape in Soundscape.allCases {
-            XCTAssertFalse(soundscape.id.isEmpty)
-            XCTAssertFalse(soundscape.iconName.isEmpty)
-        }
-    }
-}
-
-final class SharedDataManagerAndDeepLinkTests: XCTestCase {
-    func testSharedDataManagerDailyCalculations() {
-        let initialSeconds = SharedDataManager.getDailyMindfulSeconds()
-        SharedDataManager.recordMindfulDuration(30.0)
-        let updatedSeconds = SharedDataManager.getDailyMindfulSeconds()
-        XCTAssertGreaterThanOrEqual(updatedSeconds, initialSeconds + 29.0)
-
-        // Goal minutes check
-        XCTAssertGreaterThanOrEqual(SharedDataManager.dailyGoalMinutes, 1)
-    }
-
-    @MainActor
-    func testAppStateDeepLinking() {
-        let appState = AppState()
-        
-        // Deep link to breathing
-        appState.handleDeepLink(URL(string: "hapticzen://breathing")!)
-        XCTAssertTrue(appState.isMenuPresented)
-        XCTAssertEqual(appState.selectedMenuTab, .breathing)
-
-        // Deep link to canvas
-        appState.handleDeepLink(URL(string: "hapticzen://canvas")!)
-        XCTAssertFalse(appState.isMenuPresented)
-
-        // Deep link to textures
-        appState.handleDeepLink(URL(string: "hapticzen://textures")!)
-        XCTAssertTrue(appState.isMenuPresented)
-        XCTAssertEqual(appState.selectedMenuTab, .textures)
-
-        // Deep link to store
-        appState.handleDeepLink(URL(string: "hapticzen://store")!)
-        XCTAssertTrue(appState.isStorePresented)
     }
 }

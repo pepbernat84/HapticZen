@@ -1,0 +1,52 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "NSHealthShareUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptic Zen es sincronitza amb Apple Health per fer el seguiment de les teves sessions de calma i atenció plena."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptic Zen links with Apple Health to track your mindful sessions and relaxation progress."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptic Zen se sincroniza con Apple Health para registrar el seguimiento de tus sesiones de calma y atención plena."
+          }
+        }
+      }
+    },
+    "NSHealthUpdateUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptic Zen desa les teves sessions de respiració guiada i relaxació tàctil com a minuts de Mindfulness a Apple Health."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptic Zen saves your guided breathing and tactile relaxation sessions as Mindful Minutes in Apple Health."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptic Zen guarda tus sesiones de respiración guiada y relajación táctil como minutos de Mindfulness en Apple Health."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

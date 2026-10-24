@@ -1,0 +1,899 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		86513010D95C0AC4C9754A07 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B77E48D5F4EC1110943111E /* AppState.swift */; };
+		C2DEA232EAF434796076A673 /* HapticZenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B3FD33AE4A0CCABD21B179 /* HapticZenApp.swift */; };
+		0A712D28DB1B0DDEB8B127AA /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA635CF7DD1BEC6AD090CF60 /* AudioEngine.swift */; };
+		C8F13F611CA77FF3FD948EFA /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C52098E25846D3110219EF /* AudioPlayer.swift */; };
+		D36A38D6C84277D3B396B0BE /* BreathingHapticPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CC5BC1B04A1B7388ECFDAC /* BreathingHapticPlayer.swift */; };
+		A2B073B84E357E138D93A341 /* HapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEC66B35B197633E078348 /* HapticEngine.swift */; };
+		0A6861864158996C8EB9352E /* HapticPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E92586EC029A3C9A190F54F /* HapticPlayer.swift */; };
+		E992AEDD3E678EB6BED045AA /* HapticTextureMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E60BD4D3437987F6D8D657 /* HapticTextureMapper.swift */; };
+		93D398A4B3C94C2EAB904BCA /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97D104A39E83414AFD9845F /* HealthKitManager.swift */; };
+		442DE9630C9CE59D65F996E6 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BE3B84430348EC565A16D7 /* SharedDataManager.swift */; };
+		421A4A74F9DABFB66DD63265 /* ProductIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB6B6239A56FF88B04C6DF1 /* ProductIDs.swift */; };
+		45C701E7200173DCBDBFF426 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AE946830AA84C98E0B18 /* StoreManager.swift */; };
+		C4AA9FBEBD0D6954B5AB9EFD /* CGPoint+Velocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F070FDC7DE2105884EC9D72 /* CGPoint+Velocity.swift */; };
+		165AAD487AB9DA822A5D325D /* Color+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B334E48EE338897FB2DF7C1A /* Color+Theme.swift */; };
+		C002834AC7687246A877DCBB /* View+ConditionalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C4EEDE41DF5C92CB3C2250 /* View+ConditionalModifier.swift */; };
+		C3A9089430DC2E8988A0D399 /* BreathingPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56095B5B70EEA3EEECBBEF73 /* BreathingPattern.swift */; };
+		17B539F1D5216C13899130AB /* DragState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6A8FCF137566FCF87D8C57 /* DragState.swift */; };
+		BD401D7E3AEF7DB5AAB2BA04 /* HapticTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28B08DC48FACBB48D597116 /* HapticTexture.swift */; };
+		6011EF9755CCD1FD51A37361 /* Soundscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2856CC1AC5C8996D38C44B2 /* Soundscape.swift */; };
+		6CE2E65D33A53622E7FC8AB8 /* TexturePack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6AC4FC6E5766A0AA18EB4 /* TexturePack.swift */; };
+		B0AFD22AC9A2D8927284F326 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0CD4A9827F3341DD28875 /* UserPreferences.swift */; };
+		6B2311E8384B58F3A2DAAD6B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004FA75899A035A3A029C94B /* Preview Assets.xcassets */; };
+		6ECDFEC37D7B7204029F4DFD /* bubble_wrap.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 70DE4C338772F92E0F9145A8 /* bubble_wrap.ahap */; };
+		A9FC7AC5CE13B7884B48EED0 /* gears.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 1C4735187B04DEB844D6CF1B /* gears.ahap */; };
+		D8D2399976A2C2E4E542D95F /* heavy_rain.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 044CD8C653E780D5284E87CB /* heavy_rain.ahap */; };
+		2CE4020BB82A91847768E1BE /* kinetic_sand.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 7F0F42E952A5BC791CA6187D /* kinetic_sand.ahap */; };
+		71E21B197A7DB4254C17F4C3 /* stepping_snow.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 5A02E494DB6DFA9EDA1D0C50 /* stepping_snow.ahap */; };
+		52D89B48E1EFCF57CC79A6B8 /* typewriter.ahap in Resources */ = {isa = PBXBuildFile; fileRef = EA488C61582052806F8F42CB /* typewriter.ahap */; };
+		C9400D3AD72EE066433B3E9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E706E6B7FA6FCF5CA657C93 /* Assets.xcassets */; };
+		0CD372A464C54D40DFD6B82F /* bubble_wrap.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F296AFA581A653E15A0AB68 /* bubble_wrap.caf */; };
+		EE0DCFD685AA0BC1F8056906 /* gears.caf in Resources */ = {isa = PBXBuildFile; fileRef = 94A368D09BDB9E0C75949BA5 /* gears.caf */; };
+		E60FAE8BA28154520FDE2A29 /* heavy_rain.caf in Resources */ = {isa = PBXBuildFile; fileRef = 402D05F3338CA89297CC6EBF /* heavy_rain.caf */; };
+		2D12A129EBAE34E360D13DC8 /* kinetic_sand.caf in Resources */ = {isa = PBXBuildFile; fileRef = 029FF84B97B9D3EF5182045E /* kinetic_sand.caf */; };
+		C8893EC17EE4D721C0435E06 /* stepping_snow.caf in Resources */ = {isa = PBXBuildFile; fileRef = DF4E90FF2BEC1FBA6CEBAE95 /* stepping_snow.caf */; };
+		E35670148D204483BF8F49B2 /* typewriter.caf in Resources */ = {isa = PBXBuildFile; fileRef = EAAE51E3D53255F6B5E9D210 /* typewriter.caf */; };
+		E92BCAB2B956B95B38DE0A37 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 587A812A0E635F59435DADA4 /* InfoPlist.xcstrings */; };
+		1AA94C5D26B43CB772F510D1 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 128B29BCE0297C6A8D614146 /* Localizable.xcstrings */; };
+		3E70B8B41A8BD0DB21AF4D0B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 128B29BCE0297C6A8D614146 /* Localizable.xcstrings */; };
+		6AAC29A2BAFD14F8124B1215 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 22AEE31DCECB3C608EB1060F /* PrivacyInfo.xcprivacy */; };
+		3AF7B97B28F5FFA429383A37 /* GuidedBreathingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53B2205EA6D4B78F5B2A1A4 /* GuidedBreathingView.swift */; };
+		F68C7DB7B9E5C253D33C6A2B /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6900E9D3BE0F6FC77C4A50B /* CanvasView.swift */; };
+		F361843D92107DE81DA03DB7 /* CanvasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613EA96CD7042F2EA790FA25 /* CanvasViewModel.swift */; };
+		EF4133788B9CD323E1AC2F38 /* FingerTrailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E128F1B6AB927A14593B4 /* FingerTrailView.swift */; };
+		096EE98EF3DC6BD494489E8F /* MenuOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A06449605F9B029C48AA5 /* MenuOverlayView.swift */; };
+		B262508ACDDEA64FD722A92A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B896E18EE6CFABFD7A7985E0 /* SettingsView.swift */; };
+		AF070F1046B48F9C722A189A /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BA30C916716CFB50C8126A /* StoreView.swift */; };
+		95824D52E745985097E032B5 /* TexturePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66AD70D23C42ABE250DE415 /* TexturePickerView.swift */; };
+		0ED87E26C9448DADCC5EE5A8 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAF0636381BE5CFCD5F53CE /* OnboardingView.swift */; };
+		CF8F029A930AD9DB4822AEFE /* HapticTextureMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F3C39AEE005DB343CC8C87 /* HapticTextureMapperTests.swift */; };
+		2329E1167274EE918473BAA7 /* HapticZen.storekit in Resources */ = {isa = PBXBuildFile; fileRef = CD4B2610A016ABB36BB5912F /* HapticZen.storekit */; };
+		558DCDA642C18C70C5D6DBD9 /* HapticZenWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D39D9F7ACA3C9719C19BE5 /* HapticZenWidget.swift */; };
+		785B52133FF3AC76F6935698 /* HapticZenWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961B732618F8B999D92444BB /* HapticZenWidgetBundle.swift */; };
+		C5DF3F13F94CE53568BD572A /* HapticZenWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F0A403657480BF04BC42CC /* HapticZenWidgetProvider.swift */; };
+		1A6419FE3DB694A3A75D1AC4 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4C5CA8280EAD52521508E58D /* PrivacyInfo.xcprivacy */; };
+		5FBDF852E57C40CE062DD984 /* HapticZenWidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2F77FB9B052E02C2CE8D49BE /* HapticZenWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		177920C4E99EC29D9E49E8AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98D5651E07BAFE855A014FDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A7FFA0CB32D0B12DF5E9767;
+			remoteInfo = HapticZen;
+		};
+		5C713A3AF64FCC6CDCF59683 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98D5651E07BAFE855A014FDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 96997D0498111FE390C9F667;
+			remoteInfo = HapticZenWidgetsExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		ACA63930FF514722C8F37236 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5FBDF852E57C40CE062DD984 /* HapticZenWidgetsExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		7B77E48D5F4EC1110943111E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppState.swift"; sourceTree = "<group>"; };
+		A3B3FD33AE4A0CCABD21B179 /* HapticZenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticZenApp.swift"; sourceTree = "<group>"; };
+		EA635CF7DD1BEC6AD090CF60 /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioEngine.swift"; sourceTree = "<group>"; };
+		34C52098E25846D3110219EF /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioPlayer.swift"; sourceTree = "<group>"; };
+		E9CC5BC1B04A1B7388ECFDAC /* BreathingHapticPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BreathingHapticPlayer.swift"; sourceTree = "<group>"; };
+		FBCEC66B35B197633E078348 /* HapticEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticEngine.swift"; sourceTree = "<group>"; };
+		3E92586EC029A3C9A190F54F /* HapticPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticPlayer.swift"; sourceTree = "<group>"; };
+		C2E60BD4D3437987F6D8D657 /* HapticTextureMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticTextureMapper.swift"; sourceTree = "<group>"; };
+		A97D104A39E83414AFD9845F /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HealthKitManager.swift"; sourceTree = "<group>"; };
+		82BE3B84430348EC565A16D7 /* SharedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedDataManager.swift"; sourceTree = "<group>"; };
+		CDB6B6239A56FF88B04C6DF1 /* ProductIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductIDs.swift"; sourceTree = "<group>"; };
+		8F85AE946830AA84C98E0B18 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoreManager.swift"; sourceTree = "<group>"; };
+		1F070FDC7DE2105884EC9D72 /* CGPoint+Velocity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Velocity.swift"; sourceTree = "<group>"; };
+		B334E48EE338897FB2DF7C1A /* Color+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Theme.swift"; sourceTree = "<group>"; };
+		C6C4EEDE41DF5C92CB3C2250 /* View+ConditionalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ConditionalModifier.swift"; sourceTree = "<group>"; };
+		A6D3EB756C5AC1335DCA495B /* HapticZen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HapticZen.entitlements"; sourceTree = "<group>"; };
+		C3CCD4D7E8BB29718B173548 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
+		56095B5B70EEA3EEECBBEF73 /* BreathingPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BreathingPattern.swift"; sourceTree = "<group>"; };
+		BC6A8FCF137566FCF87D8C57 /* DragState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DragState.swift"; sourceTree = "<group>"; };
+		E28B08DC48FACBB48D597116 /* HapticTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticTexture.swift"; sourceTree = "<group>"; };
+		F2856CC1AC5C8996D38C44B2 /* Soundscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Soundscape.swift"; sourceTree = "<group>"; };
+		95F6AC4FC6E5766A0AA18EB4 /* TexturePack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TexturePack.swift"; sourceTree = "<group>"; };
+		6FD0CD4A9827F3341DD28875 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserPreferences.swift"; sourceTree = "<group>"; };
+		004FA75899A035A3A029C94B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		70DE4C338772F92E0F9145A8 /* bubble_wrap.ahap */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "bubble_wrap.ahap"; sourceTree = "<group>"; };
+		1C4735187B04DEB844D6CF1B /* gears.ahap */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "gears.ahap"; sourceTree = "<group>"; };
+		044CD8C653E780D5284E87CB /* heavy_rain.ahap */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "heavy_rain.ahap"; sourceTree = "<group>"; };
+		7F0F42E952A5BC791CA6187D /* kinetic_sand.ahap */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "kinetic_sand.ahap"; sourceTree = "<group>"; };
+		5A02E494DB6DFA9EDA1D0C50 /* stepping_snow.ahap */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "stepping_snow.ahap"; sourceTree = "<group>"; };
+		EA488C61582052806F8F42CB /* typewriter.ahap */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "typewriter.ahap"; sourceTree = "<group>"; };
+		0E706E6B7FA6FCF5CA657C93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
+		9F296AFA581A653E15A0AB68 /* bubble_wrap.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "bubble_wrap.caf"; sourceTree = "<group>"; };
+		94A368D09BDB9E0C75949BA5 /* gears.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "gears.caf"; sourceTree = "<group>"; };
+		402D05F3338CA89297CC6EBF /* heavy_rain.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "heavy_rain.caf"; sourceTree = "<group>"; };
+		029FF84B97B9D3EF5182045E /* kinetic_sand.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "kinetic_sand.caf"; sourceTree = "<group>"; };
+		DF4E90FF2BEC1FBA6CEBAE95 /* stepping_snow.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "stepping_snow.caf"; sourceTree = "<group>"; };
+		EAAE51E3D53255F6B5E9D210 /* typewriter.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "typewriter.caf"; sourceTree = "<group>"; };
+		587A812A0E635F59435DADA4 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = "InfoPlist.xcstrings"; sourceTree = "<group>"; };
+		128B29BCE0297C6A8D614146 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = "Localizable.xcstrings"; sourceTree = "<group>"; };
+		22AEE31DCECB3C608EB1060F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
+		E53B2205EA6D4B78F5B2A1A4 /* GuidedBreathingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GuidedBreathingView.swift"; sourceTree = "<group>"; };
+		D6900E9D3BE0F6FC77C4A50B /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CanvasView.swift"; sourceTree = "<group>"; };
+		613EA96CD7042F2EA790FA25 /* CanvasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CanvasViewModel.swift"; sourceTree = "<group>"; };
+		F20E128F1B6AB927A14593B4 /* FingerTrailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FingerTrailView.swift"; sourceTree = "<group>"; };
+		FC7A06449605F9B029C48AA5 /* MenuOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuOverlayView.swift"; sourceTree = "<group>"; };
+		B896E18EE6CFABFD7A7985E0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView.swift"; sourceTree = "<group>"; };
+		24BA30C916716CFB50C8126A /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoreView.swift"; sourceTree = "<group>"; };
+		C66AD70D23C42ABE250DE415 /* TexturePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TexturePickerView.swift"; sourceTree = "<group>"; };
+		1CAF0636381BE5CFCD5F53CE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingView.swift"; sourceTree = "<group>"; };
+		02F3C39AEE005DB343CC8C87 /* HapticTextureMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticTextureMapperTests.swift"; sourceTree = "<group>"; };
+		CD4B2610A016ABB36BB5912F /* HapticZen.storekit */ = {isa = PBXFileReference; lastKnownFileType = file.storekit; path = "HapticZen.storekit"; sourceTree = "<group>"; };
+		1FA79CA3CAB1004553161106 /* HapticZenWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HapticZenWidget.entitlements"; sourceTree = "<group>"; };
+		88D39D9F7ACA3C9719C19BE5 /* HapticZenWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticZenWidget.swift"; sourceTree = "<group>"; };
+		961B732618F8B999D92444BB /* HapticZenWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticZenWidgetBundle.swift"; sourceTree = "<group>"; };
+		99F0A403657480BF04BC42CC /* HapticZenWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticZenWidgetProvider.swift"; sourceTree = "<group>"; };
+		4C5CA8280EAD52521508E58D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
+		DB500D29B96A48BFDC6EC14B /* HapticZen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HapticZen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AAD396B891A9D3FC00332C4 /* HapticZenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HapticZenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F77FB9B052E02C2CE8D49BE /* HapticZenWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HapticZenWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		50FD83EF319EE14492608DD7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9930578117CA29F961E2B602 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		35BA7338287CC58B6B295B32 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F729E66E55007E055E036E6F = {
+			isa = PBXGroup;
+			children = (
+				AA261E9D561F435C6BC98C02 /* HapticZen */,
+				72A2F5FFC9210B4110D4931E /* HapticZenWidgets */,
+				878EB4CC7CF553A48A9F25DB /* HapticZenTests */,
+				B65B87CF128A44E5BA45FFD4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA261E9D561F435C6BC98C02 /* HapticZen */ = {
+			isa = PBXGroup;
+			children = (
+				08BDB1CCD7CF9591373B058E,
+				70A5759BCF73015F27600A23,
+				4D1C8DA7467BE28B5AB4542E,
+				BB067F4AAD4215FCE8254526,
+				A4280DAD7FE6696B2DD7BB94,
+				7EADA9FB21752B071502E666,
+				2794A59AAA9E723642F93338,
+				A6D3EB756C5AC1335DCA495B,
+				C3CCD4D7E8BB29718B173548,
+			);
+			path = HapticZen;
+			sourceTree = "<group>";
+		};
+		72A2F5FFC9210B4110D4931E /* HapticZenWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				1FA79CA3CAB1004553161106,
+				88D39D9F7ACA3C9719C19BE5,
+				961B732618F8B999D92444BB,
+				99F0A403657480BF04BC42CC,
+				4C5CA8280EAD52521508E58D,
+			);
+			path = HapticZenWidgets;
+			sourceTree = "<group>";
+		};
+		878EB4CC7CF553A48A9F25DB /* HapticZenTests */ = {
+			isa = PBXGroup;
+			children = (
+				02F3C39AEE005DB343CC8C87,
+				CD4B2610A016ABB36BB5912F,
+			);
+			path = HapticZenTests;
+			sourceTree = "<group>";
+		};
+		B65B87CF128A44E5BA45FFD4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB500D29B96A48BFDC6EC14B /* HapticZen.app */,
+				7AAD396B891A9D3FC00332C4 /* HapticZenTests.xctest */,
+				2F77FB9B052E02C2CE8D49BE /* HapticZenWidgetsExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		08BDB1CCD7CF9591373B058E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				7B77E48D5F4EC1110943111E,
+				A3B3FD33AE4A0CCABD21B179,
+			);
+			name = "App";
+			path = "App";
+			sourceTree = "<group>";
+		};
+		70A5759BCF73015F27600A23 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				012D08EAFBDAAA1FD7699C96,
+				5AA150F093D185F625972FB0,
+				7FF158A6C55262E0A1597EA7,
+				2034470D0F1398562E61EB3F,
+				D7F78B425AC9DFBD399608F7,
+			);
+			name = "Core";
+			path = "Core";
+			sourceTree = "<group>";
+		};
+		012D08EAFBDAAA1FD7699C96 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				EA635CF7DD1BEC6AD090CF60,
+				34C52098E25846D3110219EF,
+			);
+			name = "Audio";
+			path = "Audio";
+			sourceTree = "<group>";
+		};
+		5AA150F093D185F625972FB0 /* Haptics */ = {
+			isa = PBXGroup;
+			children = (
+				E9CC5BC1B04A1B7388ECFDAC,
+				FBCEC66B35B197633E078348,
+				3E92586EC029A3C9A190F54F,
+				C2E60BD4D3437987F6D8D657,
+			);
+			name = "Haptics";
+			path = "Haptics";
+			sourceTree = "<group>";
+		};
+		7FF158A6C55262E0A1597EA7 /* Health */ = {
+			isa = PBXGroup;
+			children = (
+				A97D104A39E83414AFD9845F,
+			);
+			name = "Health";
+			path = "Health";
+			sourceTree = "<group>";
+		};
+		2034470D0F1398562E61EB3F /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				82BE3B84430348EC565A16D7,
+			);
+			name = "Storage";
+			path = "Storage";
+			sourceTree = "<group>";
+		};
+		D7F78B425AC9DFBD399608F7 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				CDB6B6239A56FF88B04C6DF1,
+				8F85AE946830AA84C98E0B18,
+			);
+			name = "Store";
+			path = "Store";
+			sourceTree = "<group>";
+		};
+		4D1C8DA7467BE28B5AB4542E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1F070FDC7DE2105884EC9D72,
+				B334E48EE338897FB2DF7C1A,
+				C6C4EEDE41DF5C92CB3C2250,
+			);
+			name = "Extensions";
+			path = "Extensions";
+			sourceTree = "<group>";
+		};
+		BB067F4AAD4215FCE8254526 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				56095B5B70EEA3EEECBBEF73,
+				BC6A8FCF137566FCF87D8C57,
+				E28B08DC48FACBB48D597116,
+				F2856CC1AC5C8996D38C44B2,
+				95F6AC4FC6E5766A0AA18EB4,
+				6FD0CD4A9827F3341DD28875,
+			);
+			name = "Models";
+			path = "Models";
+			sourceTree = "<group>";
+		};
+		A4280DAD7FE6696B2DD7BB94 /* PreviewContent */ = {
+			isa = PBXGroup;
+			children = (
+				004FA75899A035A3A029C94B,
+			);
+			name = "PreviewContent";
+			path = "PreviewContent";
+			sourceTree = "<group>";
+		};
+		7EADA9FB21752B071502E666 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ED984373B1FF237B501DAE41,
+				0E706E6B7FA6FCF5CA657C93,
+				EA7BB06BA97D823CB8051F3B,
+				587A812A0E635F59435DADA4,
+				128B29BCE0297C6A8D614146,
+				22AEE31DCECB3C608EB1060F,
+			);
+			name = "Resources";
+			path = "Resources";
+			sourceTree = "<group>";
+		};
+		ED984373B1FF237B501DAE41 /* AHAP */ = {
+			isa = PBXGroup;
+			children = (
+				70DE4C338772F92E0F9145A8,
+				1C4735187B04DEB844D6CF1B,
+				044CD8C653E780D5284E87CB,
+				7F0F42E952A5BC791CA6187D,
+				5A02E494DB6DFA9EDA1D0C50,
+				EA488C61582052806F8F42CB,
+			);
+			name = "AHAP";
+			path = "AHAP";
+			sourceTree = "<group>";
+		};
+		EA7BB06BA97D823CB8051F3B /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				9F296AFA581A653E15A0AB68,
+				94A368D09BDB9E0C75949BA5,
+				402D05F3338CA89297CC6EBF,
+				029FF84B97B9D3EF5182045E,
+				DF4E90FF2BEC1FBA6CEBAE95,
+				EAAE51E3D53255F6B5E9D210,
+			);
+			name = "Audio";
+			path = "Audio";
+			sourceTree = "<group>";
+		};
+		2794A59AAA9E723642F93338 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1D743B2E9F5A8129E80E3830,
+				0BCF4C8CFDB7AE9DA582EEAA,
+				791E81AAEDDFBC829EA11B2E,
+				3E5404656F69FF385C7E58E1,
+			);
+			name = "Views";
+			path = "Views";
+			sourceTree = "<group>";
+		};
+		1D743B2E9F5A8129E80E3830 /* Breathing */ = {
+			isa = PBXGroup;
+			children = (
+				E53B2205EA6D4B78F5B2A1A4,
+			);
+			name = "Breathing";
+			path = "Breathing";
+			sourceTree = "<group>";
+		};
+		0BCF4C8CFDB7AE9DA582EEAA /* Canvas */ = {
+			isa = PBXGroup;
+			children = (
+				D6900E9D3BE0F6FC77C4A50B,
+				613EA96CD7042F2EA790FA25,
+				F20E128F1B6AB927A14593B4,
+			);
+			name = "Canvas";
+			path = "Canvas";
+			sourceTree = "<group>";
+		};
+		791E81AAEDDFBC829EA11B2E /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				FC7A06449605F9B029C48AA5,
+				B896E18EE6CFABFD7A7985E0,
+				24BA30C916716CFB50C8126A,
+				C66AD70D23C42ABE250DE415,
+			);
+			name = "Menu";
+			path = "Menu";
+			sourceTree = "<group>";
+		};
+		3E5404656F69FF385C7E58E1 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				1CAF0636381BE5CFCD5F53CE,
+			);
+			name = "Onboarding";
+			path = "Onboarding";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7A7FFA0CB32D0B12DF5E9767 /* HapticZen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B3F8206A73251A195D7678B2 /* Build configuration list for PBXNativeTarget "HapticZen" */;
+			buildPhases = (
+				59108F979B007B23E2DF40DE /* Sources */,
+				50FD83EF319EE14492608DD7 /* Frameworks */,
+				B6672F2E0FAB4202DE02002A /* Resources */,
+				ACA63930FF514722C8F37236 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F25CC28842EA0266477E8567 /* PBXTargetDependency */,
+			);
+			name = HapticZen;
+			productName = HapticZen;
+			productReference = DB500D29B96A48BFDC6EC14B /* HapticZen.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8B034047EF8E3806A6D4615F /* HapticZenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 078FA034ABACCA363F232736 /* Build configuration list for PBXNativeTarget "HapticZenTests" */;
+			buildPhases = (
+				F61DF15CFDC7BBC3F79961D7 /* Sources */,
+				9930578117CA29F961E2B602 /* Frameworks */,
+				1C9DF61475E6F783001EA831 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				291AB9A289ACF1074A93273E /* PBXTargetDependency */,
+			);
+			name = HapticZenTests;
+			productName = HapticZenTests;
+			productReference = 7AAD396B891A9D3FC00332C4 /* HapticZenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		96997D0498111FE390C9F667 /* HapticZenWidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 100F4DEBB1532BF095A978CB /* Build configuration list for PBXNativeTarget "HapticZenWidgetsExtension" */;
+			buildPhases = (
+				BBA6A7E7DD083294ADEDD87C /* Sources */,
+				35BA7338287CC58B6B295B32 /* Frameworks */,
+				8C3E1458E7953923423C4A57 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HapticZenWidgetsExtension;
+			productName = HapticZenWidgetsExtension;
+			productReference = 2F77FB9B052E02C2CE8D49BE /* HapticZenWidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		98D5651E07BAFE855A014FDF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1500;
+				OrganizationName = HapticZen;
+				TargetAttributes = {
+					7A7FFA0CB32D0B12DF5E9767 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					8B034047EF8E3806A6D4615F = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 7A7FFA0CB32D0B12DF5E9767;
+					};
+					96997D0498111FE390C9F667 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 7D2811BDE7CEF7224D362561 /* Build configuration list for PBXProject "HapticZen" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				ca,
+				es,
+				Base,
+			);
+			mainGroup = F729E66E55007E055E036E6F;
+			productRefGroup = B65B87CF128A44E5BA45FFD4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7A7FFA0CB32D0B12DF5E9767 /* HapticZen */,
+				96997D0498111FE390C9F667 /* HapticZenWidgetsExtension */,
+				8B034047EF8E3806A6D4615F /* HapticZenTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B6672F2E0FAB4202DE02002A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B2311E8384B58F3A2DAAD6B /* Preview Assets.xcassets in Resources */,
+				6ECDFEC37D7B7204029F4DFD /* bubble_wrap.ahap in Resources */,
+				A9FC7AC5CE13B7884B48EED0 /* gears.ahap in Resources */,
+				D8D2399976A2C2E4E542D95F /* heavy_rain.ahap in Resources */,
+				2CE4020BB82A91847768E1BE /* kinetic_sand.ahap in Resources */,
+				71E21B197A7DB4254C17F4C3 /* stepping_snow.ahap in Resources */,
+				52D89B48E1EFCF57CC79A6B8 /* typewriter.ahap in Resources */,
+				C9400D3AD72EE066433B3E9C /* Assets.xcassets in Resources */,
+				0CD372A464C54D40DFD6B82F /* bubble_wrap.caf in Resources */,
+				EE0DCFD685AA0BC1F8056906 /* gears.caf in Resources */,
+				E60FAE8BA28154520FDE2A29 /* heavy_rain.caf in Resources */,
+				2D12A129EBAE34E360D13DC8 /* kinetic_sand.caf in Resources */,
+				C8893EC17EE4D721C0435E06 /* stepping_snow.caf in Resources */,
+				E35670148D204483BF8F49B2 /* typewriter.caf in Resources */,
+				E92BCAB2B956B95B38DE0A37 /* InfoPlist.xcstrings in Resources */,
+				1AA94C5D26B43CB772F510D1 /* Localizable.xcstrings in Resources */,
+				6AAC29A2BAFD14F8124B1215 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C9DF61475E6F783001EA831 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2329E1167274EE918473BAA7 /* HapticZen.storekit in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C3E1458E7953923423C4A57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E70B8B41A8BD0DB21AF4D0B /* Localizable.xcstrings in Resources */,
+				1A6419FE3DB694A3A75D1AC4 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		59108F979B007B23E2DF40DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86513010D95C0AC4C9754A07 /* AppState.swift in Sources */,
+				C2DEA232EAF434796076A673 /* HapticZenApp.swift in Sources */,
+				0A712D28DB1B0DDEB8B127AA /* AudioEngine.swift in Sources */,
+				C8F13F611CA77FF3FD948EFA /* AudioPlayer.swift in Sources */,
+				D36A38D6C84277D3B396B0BE /* BreathingHapticPlayer.swift in Sources */,
+				A2B073B84E357E138D93A341 /* HapticEngine.swift in Sources */,
+				0A6861864158996C8EB9352E /* HapticPlayer.swift in Sources */,
+				E992AEDD3E678EB6BED045AA /* HapticTextureMapper.swift in Sources */,
+				93D398A4B3C94C2EAB904BCA /* HealthKitManager.swift in Sources */,
+				442DE9630C9CE59D65F996E6 /* SharedDataManager.swift in Sources */,
+				421A4A74F9DABFB66DD63265 /* ProductIDs.swift in Sources */,
+				45C701E7200173DCBDBFF426 /* StoreManager.swift in Sources */,
+				C4AA9FBEBD0D6954B5AB9EFD /* CGPoint+Velocity.swift in Sources */,
+				165AAD487AB9DA822A5D325D /* Color+Theme.swift in Sources */,
+				C002834AC7687246A877DCBB /* View+ConditionalModifier.swift in Sources */,
+				C3A9089430DC2E8988A0D399 /* BreathingPattern.swift in Sources */,
+				17B539F1D5216C13899130AB /* DragState.swift in Sources */,
+				BD401D7E3AEF7DB5AAB2BA04 /* HapticTexture.swift in Sources */,
+				6011EF9755CCD1FD51A37361 /* Soundscape.swift in Sources */,
+				6CE2E65D33A53622E7FC8AB8 /* TexturePack.swift in Sources */,
+				B0AFD22AC9A2D8927284F326 /* UserPreferences.swift in Sources */,
+				3AF7B97B28F5FFA429383A37 /* GuidedBreathingView.swift in Sources */,
+				F68C7DB7B9E5C253D33C6A2B /* CanvasView.swift in Sources */,
+				F361843D92107DE81DA03DB7 /* CanvasViewModel.swift in Sources */,
+				EF4133788B9CD323E1AC2F38 /* FingerTrailView.swift in Sources */,
+				096EE98EF3DC6BD494489E8F /* MenuOverlayView.swift in Sources */,
+				B262508ACDDEA64FD722A92A /* SettingsView.swift in Sources */,
+				AF070F1046B48F9C722A189A /* StoreView.swift in Sources */,
+				95824D52E745985097E032B5 /* TexturePickerView.swift in Sources */,
+				0ED87E26C9448DADCC5EE5A8 /* OnboardingView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F61DF15CFDC7BBC3F79961D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF8F029A930AD9DB4822AEFE /* HapticTextureMapperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBA6A7E7DD083294ADEDD87C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				558DCDA642C18C70C5D6DBD9 /* HapticZenWidget.swift in Sources */,
+				785B52133FF3AC76F6935698 /* HapticZenWidgetBundle.swift in Sources */,
+				C5DF3F13F94CE53568BD572A /* HapticZenWidgetProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		291AB9A289ACF1074A93273E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A7FFA0CB32D0B12DF5E9767 /* HapticZen */;
+			targetProxy = 177920C4E99EC29D9E49E8AB /* PBXContainerItemProxy */;
+		};
+		F25CC28842EA0266477E8567 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 96997D0498111FE390C9F667 /* HapticZenWidgetsExtension */;
+			targetProxy = 5C713A3AF64FCC6CDCF59683 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		687E6A61460ED98F7478F186 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C3FEA3E2F47AC48AFBCFCFDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1A5A5042C534E20348EB75C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "HapticZen/HapticZen.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "HapticZen/PreviewContent";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "HapticZen/Info.plist";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Haptic Zen links with Apple Health to track your mindful sessions and relaxation progress.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Haptic Zen saves your guided breathing and tactile relaxation sessions as Mindful Minutes in Apple Health.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hapticzen.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		AFD37D7F4EDC2CB7C32E7853 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "HapticZen/HapticZen.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "HapticZen/PreviewContent";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "HapticZen/Info.plist";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Haptic Zen links with Apple Health to track your mindful sessions and relaxation progress.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Haptic Zen saves your guided breathing and tactile relaxation sessions as Mindful Minutes in Apple Health.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hapticzen.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		2ED7CADF8AB5F122CFCAC146 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "HapticZenWidgets/HapticZenWidget.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Haptic Zen";
+				INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hapticzen.app.widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		315D194DA771B6FF934978FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "HapticZenWidgets/HapticZenWidget.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Haptic Zen";
+				INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hapticzen.app.widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		5C7A41CA7F90A646D0BA957C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hapticzen.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HapticZen.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HapticZen";
+			};
+			name = Debug;
+		};
+		E17E96A9017F7CCCBC111C95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hapticzen.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HapticZen.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HapticZen";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7D2811BDE7CEF7224D362561 /* Build configuration list for PBXProject "HapticZen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				687E6A61460ED98F7478F186 /* Debug */,
+				C3FEA3E2F47AC48AFBCFCFDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B3F8206A73251A195D7678B2 /* Build configuration list for PBXNativeTarget "HapticZen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A5A5042C534E20348EB75C3 /* Debug */,
+				AFD37D7F4EDC2CB7C32E7853 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		100F4DEBB1532BF095A978CB /* Build configuration list for PBXNativeTarget "HapticZenWidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2ED7CADF8AB5F122CFCAC146 /* Debug */,
+				315D194DA771B6FF934978FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		078FA034ABACCA363F232736 /* Build configuration list for PBXNativeTarget "HapticZenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C7A41CA7F90A646D0BA957C /* Debug */,
+				E17E96A9017F7CCCBC111C95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 98D5651E07BAFE855A014FDF /* Project object */;
+}

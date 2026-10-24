@@ -1,0 +1,31 @@
+{
+    "Version": 1.0,
+    "Metadata": {
+        "Project": "Haptic Zen",
+        "Created": "2026-07-19",
+        "Description": "Precise ratchet tick simulating clockwork gears meshing together."
+    },
+    "Pattern": [
+        {
+            "Event": {
+                "Time": 0.0,
+                "EventType": "HapticTransient",
+                "EventParameters": [
+                    { "ParameterID": "HapticIntensity", "ParameterValue": 0.75 },
+                    { "ParameterID": "HapticSharpness", "ParameterValue": 0.8 }
+                ]
+            }
+        },
+        {
+            "Event": {
+                "Time": 0.012,
+                "EventType": "HapticContinuous",
+                "EventDuration": 0.035,
+                "EventParameters": [
+                    { "ParameterID": "HapticIntensity", "ParameterValue": 0.25 },
+                    { "ParameterID": "HapticSharpness", "ParameterValue": 0.4 }
+                ]
+            }
+        }
+    ]
+}

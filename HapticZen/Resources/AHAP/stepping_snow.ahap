@@ -1,0 +1,42 @@
+{
+    "Version": 1.0,
+    "Metadata": {
+        "Project": "Haptic Zen",
+        "Created": "2026-07-19",
+        "Description": "Deep crunching compression with icy crystalline top-end transients simulating stepping on fresh powder snow."
+    },
+    "Pattern": [
+        {
+            "Event": {
+                "Time": 0.0,
+                "EventType": "HapticContinuous",
+                "EventDuration": 30.0,
+                "EventParameters": [
+                    { "ParameterID": "HapticIntensity", "ParameterValue": 0.65 },
+                    { "ParameterID": "HapticSharpness", "ParameterValue": 0.35 }
+                ]
+            }
+        },
+        {
+            "Event": {
+                "Time": 0.01,
+                "EventType": "HapticTransient",
+                "EventParameters": [
+                    { "ParameterID": "HapticIntensity", "ParameterValue": 0.75 },
+                    { "ParameterID": "HapticSharpness", "ParameterValue": 0.85 }
+                ]
+            }
+        },
+        {
+            "Event": {
+                "Time": 0.035,
+                "EventType": "HapticContinuous",
+                "EventDuration": 0.08,
+                "EventParameters": [
+                    { "ParameterID": "HapticIntensity", "ParameterValue": 0.5 },
+                    { "ParameterID": "HapticSharpness", "ParameterValue": 0.2 }
+                ]
+            }
+        }
+    ]
+}

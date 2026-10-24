@@ -1,0 +1,30 @@
+{
+    "Version": 1.0,
+    "Metadata": {
+        "Project": "Haptic Zen",
+        "Created": "2026-07-19",
+        "Description": "Sharp, heavy mechanical clack simulating an antique typewriter key press."
+    },
+    "Pattern": [
+        {
+            "Event": {
+                "Time": 0.0,
+                "EventType": "HapticTransient",
+                "EventParameters": [
+                    { "ParameterID": "HapticIntensity", "ParameterValue": 1.0 },
+                    { "ParameterID": "HapticSharpness", "ParameterValue": 0.98 }
+                ]
+            }
+        },
+        {
+            "Event": {
+                "Time": 0.018,
+                "EventType": "HapticTransient",
+                "EventParameters": [
+                    { "ParameterID": "HapticIntensity", "ParameterValue": 0.5 },
+                    { "ParameterID": "HapticSharpness", "ParameterValue": 0.85 }
+                ]
+            }
+        }
+    ]
+}

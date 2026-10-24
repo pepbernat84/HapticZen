@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.hapticzen.app</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>hapticzen</string>
+			</array>
+		</dict>
+	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Haptic Zen links with Apple Health to track your mindful sessions and relaxation progress.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Haptic Zen saves your guided breathing and tactile relaxation sessions as Mindful Minutes in Apple Health.</string>
+</dict>
+</plist>

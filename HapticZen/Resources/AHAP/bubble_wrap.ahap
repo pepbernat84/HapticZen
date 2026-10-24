@@ -1,0 +1,30 @@
+{
+    "Version": 1.0,
+    "Metadata": {
+        "Project": "Haptic Zen",
+        "Created": "2026-07-19",
+        "Description": "Crisp tactile pop simulating popping bubble wrap with satisfying rebound."
+    },
+    "Pattern": [
+        {
+            "Event": {
+                "Time": 0.0,
+                "EventType": "HapticTransient",
+                "EventParameters": [
+                    { "ParameterID": "HapticIntensity", "ParameterValue": 0.9 },
+                    { "ParameterID": "HapticSharpness", "ParameterValue": 0.95 }
+                ]
+            }
+        },
+        {
+            "Event": {
+                "Time": 0.025,
+                "EventType": "HapticTransient",
+                "EventParameters": [
+                    { "ParameterID": "HapticIntensity", "ParameterValue": 0.35 },
+                    { "ParameterID": "HapticSharpness", "ParameterValue": 0.6 }
+                ]
+            }
+        }
+    ]
+}

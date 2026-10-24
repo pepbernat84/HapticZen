@@ -1,0 +1,115 @@
+{
+  "identifier" : "E2B7C19D",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : true,
+      "internalID" : "1001",
+      "localizations" : [
+        {
+          "description" : "Precision mechanical clicks and satisfying tactile feedback.",
+          "displayName" : "Mechanical Pack",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Sensacions mecàniques de precisió i clics tàctils satisfaccions.",
+          "displayName" : "Paquet Mecànic",
+          "locale" : "ca_ES"
+        },
+        {
+          "description" : "Sensaciones mecánicas de precisión y clics táctiles satisfactorios.",
+          "displayName" : "Paquete Mecánico",
+          "locale" : "es_ES"
+        }
+      ],
+      "productID" : "com.hapticzen.pack.mechanical",
+      "referenceName" : "Mechanical Pack",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : true,
+      "internalID" : "1002",
+      "localizations" : [
+        {
+          "description" : "Immersive organic and natural experiences with ASMR soundscapes.",
+          "displayName" : "Nature Pack",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Experiències orgàniques i naturals inmersives amb sons ASMR.",
+          "displayName" : "Paquet Natural",
+          "locale" : "ca_ES"
+        },
+        {
+          "description" : "Experiencias orgánicas y naturales inmersivas con sonidos ASMR.",
+          "displayName" : "Paquete Naturaleza",
+          "locale" : "es_ES"
+        }
+      ],
+      "productID" : "com.hapticzen.pack.nature",
+      "referenceName" : "Nature Pack",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

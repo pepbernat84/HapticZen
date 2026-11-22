@@ -154,6 +154,20 @@ struct SettingsView: View {
                 }
                 .pickerStyle(.menu)
 
+                Picker(selection: $appState.preferences.dailyGoalMinutes) {
+                    ForEach(UserPreferences.dailyGoalOptions, id: \.self) { minutes in
+                        Text("settings.wellness.dailyGoal.minutes \(minutes)").tag(minutes)
+                    }
+                } label: {
+                    HStack {
+                        Image(systemName: "target")
+                            .foregroundColor(.zenGlow)
+                        Text("settings.wellness.dailyGoal")
+                            .font(.system(.subheadline, design: .rounded, weight: .medium))
+                    }
+                }
+                .pickerStyle(.menu)
+
                 Toggle(isOn: $appState.preferences.isHealthKitTrackingEnabled) {
                     HStack {
                         Image(systemName: "heart.text.square.fill")
@@ -225,6 +239,12 @@ struct SettingsView: View {
         }
         .onChange(of: appState.preferences.soundscapeVolume) { _ in
             updateAudioEngineSoundscape()
+        }
+        .onChange(of: appState.preferences.dailyGoalMinutes) { newGoal in
+            SharedDataManager.dailyGoalMinutes = newGoal
+        }
+        .onChange(of: appState.preferences.selectedBreathingPatternString) { _ in
+            SharedDataManager.sync(from: appState.preferences)
         }
         .onChange(of: appState.preferences.isHealthKitTrackingEnabled) { enabled in
             if enabled && !HealthKitManager.shared.isAuthorized {

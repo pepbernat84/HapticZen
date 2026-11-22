@@ -26,6 +26,7 @@ final class SharedDataManagerTests: XCTestCase {
             shared.removeObject(forKey: key)
         }
         UserDefaults.standard.removeObject(forKey: "dailyMindfulSeconds")
+        UserDefaults.standard.removeObject(forKey: "dailyGoalMinutes")
         UserDefaults.standard.removeObject(forKey: "selectedBreathingPattern")
         UserDefaults.standard.removeObject(forKey: "selectedTextureID")
     }
@@ -54,15 +55,18 @@ final class SharedDataManagerTests: XCTestCase {
         let prefs = UserPreferences()
         prefs.selectedBreathingPattern = .box
         prefs.selectedTexture = .kineticSand
+        prefs.dailyGoalMinutes = 20
 
         SharedDataManager.sync(from: prefs)
 
         XCTAssertEqual(SharedDataManager.storedBreathingPattern, "box")
         XCTAssertEqual(SharedDataManager.storedTextureID, HapticTexture.kineticSand.id)
+        XCTAssertEqual(SharedDataManager.dailyGoalMinutes, 20)
 
         // Reset
         prefs.selectedBreathingPattern = .paced
         prefs.selectedTexture = .bubbleWrap
+        prefs.dailyGoalMinutes = 10
         SharedDataManager.sync(from: prefs)
     }
 

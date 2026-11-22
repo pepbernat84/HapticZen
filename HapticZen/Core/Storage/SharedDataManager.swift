@@ -37,6 +37,7 @@ public struct SharedDataManager {
         let syncedSeconds = max(sharedDefaults.double(forKey: Keys.dailyMindfulSeconds), preferences.dailyMindfulSeconds)
         sharedDefaults.set(syncedSeconds, forKey: Keys.dailyMindfulSeconds)
         preferences.dailyMindfulSeconds = syncedSeconds
+        sharedDefaults.set(max(1, preferences.dailyGoalMinutes), forKey: Keys.dailyGoalMinutes)
         sharedDefaults.set(preferences.selectedBreathingPattern.rawValue, forKey: Keys.selectedBreathingPattern)
         sharedDefaults.set(preferences.selectedTexture.id, forKey: Keys.selectedTextureID)
         sharedDefaults.set(now.timeIntervalSince1970, forKey: Keys.lastSavedDate)

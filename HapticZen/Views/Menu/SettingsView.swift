@@ -11,7 +11,7 @@ struct SettingsView: View {
                         Image(systemName: "hand.tap.fill")
                             .foregroundColor(.zenGlow)
                         Text("settings.haptics.enable")
-                            .font(.system(size: 15, weight: .medium, design: .rounded))
+                            .font(.system(.subheadline, design: .rounded, weight: .medium))
                             .foregroundColor(.white)
                     }
                 }
@@ -24,11 +24,11 @@ struct SettingsView: View {
                             Image(systemName: "waveform")
                                 .foregroundColor(.zenGlow)
                             Text("settings.haptics.intensity")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .font(.system(.subheadline, design: .rounded, weight: .medium))
                                 .foregroundColor(.white)
                             Spacer()
                             Text(String(format: "%.0f%%", appState.preferences.hapticIntensityMultiplier * 100))
-                                .font(.system(size: 14, weight: .semibold, design: .monospaced))
+                                .font(.system(.footnote, design: .monospaced, weight: .semibold))
                                 .foregroundColor(.zenGlow)
                         }
                         Slider(value: $appState.preferences.hapticIntensityMultiplier, in: 0.2...1.5, step: 0.1)
@@ -41,11 +41,11 @@ struct SettingsView: View {
                             Image(systemName: "bolt.fill")
                                 .foregroundColor(.zenGlow)
                             Text("settings.haptics.sharpness")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .font(.system(.subheadline, design: .rounded, weight: .medium))
                                 .foregroundColor(.white)
                             Spacer()
                             Text(String(format: "%.0f%%", appState.preferences.hapticSharpnessMultiplier * 100))
-                                .font(.system(size: 14, weight: .semibold, design: .monospaced))
+                                .font(.system(.footnote, design: .monospaced, weight: .semibold))
                                 .foregroundColor(.zenGlow)
                         }
                         Slider(value: $appState.preferences.hapticSharpnessMultiplier, in: 0.2...2.0, step: 0.1)
@@ -59,7 +59,7 @@ struct SettingsView: View {
                         Image(systemName: "speaker.wave.2.fill")
                             .foregroundColor(.zenGlow)
                         Text("settings.audio.enable")
-                            .font(.system(size: 15, weight: .medium, design: .rounded))
+                            .font(.system(.subheadline, design: .rounded, weight: .medium))
                             .foregroundColor(.white)
                     }
                 }
@@ -72,11 +72,11 @@ struct SettingsView: View {
                             Image(systemName: "slider.horizontal.3")
                                 .foregroundColor(.zenGlow)
                             Text("settings.audio.volume")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .font(.system(.subheadline, design: .rounded, weight: .medium))
                                 .foregroundColor(.white)
                             Spacer()
                             Text(String(format: "%.0f%%", appState.preferences.audioVolume * 100))
-                                .font(.system(size: 14, weight: .semibold, design: .monospaced))
+                                .font(.system(.footnote, design: .monospaced, weight: .semibold))
                                 .foregroundColor(.zenGlow)
                         }
                         Slider(value: $appState.preferences.audioVolume, in: 0.0...1.0, step: 0.05)
@@ -89,11 +89,11 @@ struct SettingsView: View {
                             Image(systemName: "tuningfork")
                                 .foregroundColor(.zenGlow)
                             Text("settings.audio.pitch")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .font(.system(.subheadline, design: .rounded, weight: .medium))
                                 .foregroundColor(.white)
                             Spacer()
                             Text(String(format: "%.0f%%", appState.preferences.audioPitchSensitivity * 100))
-                                .font(.system(size: 14, weight: .semibold, design: .monospaced))
+                                .font(.system(.footnote, design: .monospaced, weight: .semibold))
                                 .foregroundColor(.zenGlow)
                         }
                         Slider(value: $appState.preferences.audioPitchSensitivity, in: 0.5...2.0, step: 0.1)
@@ -110,7 +110,7 @@ struct SettingsView: View {
                             Image(systemName: "cloud.rain.fill")
                                 .foregroundColor(.zenGlow)
                             Text("settings.audio.soundscape")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .font(.system(.subheadline, design: .rounded, weight: .medium))
                         }
                     }
                     .pickerStyle(.menu)
@@ -121,11 +121,11 @@ struct SettingsView: View {
                                 Image(systemName: "speaker.wave.1.fill")
                                     .foregroundColor(.zenGlow)
                                 Text("settings.soundscape.volume")
-                                    .font(.system(size: 15, weight: .medium, design: .rounded))
+                                    .font(.system(.subheadline, design: .rounded, weight: .medium))
                                     .foregroundColor(.white)
                                 Spacer()
                                 Text(String(format: "%.0f%%", appState.preferences.soundscapeVolume * 100))
-                                    .font(.system(size: 14, weight: .semibold, design: .monospaced))
+                                    .font(.system(.footnote, design: .monospaced, weight: .semibold))
                                     .foregroundColor(.zenGlow)
                             }
                             Slider(value: $appState.preferences.soundscapeVolume, in: 0.0...1.0, step: 0.05)
@@ -149,7 +149,7 @@ struct SettingsView: View {
                         Image(systemName: "wind")
                             .foregroundColor(.zenGlow)
                         Text("settings.wellness.breathingPattern")
-                            .font(.system(size: 15, weight: .medium, design: .rounded))
+                            .font(.system(.subheadline, design: .rounded, weight: .medium))
                     }
                 }
                 .pickerStyle(.menu)
@@ -160,10 +160,10 @@ struct SettingsView: View {
                             .foregroundColor(.zenGlow)
                         VStack(alignment: .leading, spacing: 2) {
                             Text("settings.wellness.healthkit")
-                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .font(.system(.subheadline, design: .rounded, weight: .medium))
                                 .foregroundColor(.white)
                             Text("settings.wellness.healthkit.desc")
-                                .font(.system(size: 12, weight: .regular, design: .rounded))
+                                .font(.system(.caption, design: .rounded, weight: .regular))
                                 .foregroundColor(.white.opacity(0.6))
                         }
                     }
@@ -186,7 +186,7 @@ struct SettingsView: View {
                         Image(systemName: "eye.fill")
                             .foregroundColor(.zenGlow)
                         Text("settings.visual.style")
-                            .font(.system(size: 15, weight: .medium, design: .rounded))
+                            .font(.system(.subheadline, design: .rounded, weight: .medium))
                     }
                 }
                 .pickerStyle(.menu)
@@ -203,7 +203,7 @@ struct SettingsView: View {
                         Image(systemName: "questionmark.circle.fill")
                             .foregroundColor(.zenGlow)
                         Text("settings.tutorial.show")
-                            .font(.system(size: 15, weight: .medium, design: .rounded))
+                            .font(.system(.subheadline, design: .rounded, weight: .medium))
                             .foregroundColor(.white)
                     }
                 }

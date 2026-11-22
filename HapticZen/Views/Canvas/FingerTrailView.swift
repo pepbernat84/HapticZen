@@ -2,6 +2,8 @@ import SwiftUI
 
 /// Renders the dynamic visual feedback following the user's finger across the canvas.
 struct FingerTrailView: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     let dragState: DragState
     let style: VisualStyle
     let touchPoints: [CGPoint]
@@ -39,7 +41,7 @@ struct FingerTrailView: View {
                 )
                 .frame(width: 350, height: 350)
                 .position(dragState.currentPosition)
-                .animation(.interactiveSpring(), value: dragState.currentPosition)
+                .animation(reduceMotion ? nil : .interactiveSpring(), value: dragState.currentPosition)
             }
         }
     }
@@ -58,7 +60,7 @@ struct FingerTrailView: View {
                             let duration: TimeInterval = 0.85
                             if elapsed < duration && elapsed >= 0 {
                                 let progress = elapsed / duration
-                                let currentRadius = ripple.maxRadius * CGFloat(progress)
+                                let currentRadius = reduceMotion ? ripple.maxRadius * 0.6 : ripple.maxRadius * CGFloat(progress)
                                 let opacity = (1.0 - progress) * 0.8
                                 
                                 let rect = CGRect(
@@ -117,8 +119,8 @@ struct FingerTrailView: View {
                             let duration: TimeInterval = 1.2
                             if elapsed < duration && elapsed >= 0 {
                                 let progress = elapsed / duration
-                                let currentX = particle.position.x + particle.velocity.dx * CGFloat(elapsed)
-                                let currentY = particle.position.y + particle.velocity.dy * CGFloat(elapsed)
+                                let currentX = reduceMotion ? particle.position.x : particle.position.x + particle.velocity.dx * CGFloat(elapsed)
+                                let currentY = reduceMotion ? particle.position.y : particle.position.y + particle.velocity.dy * CGFloat(elapsed)
                                 let currentSize = max(1.0, particle.size * CGFloat(1.0 - progress * 0.6))
                                 let opacity = (1.0 - progress) * 0.9
                                 

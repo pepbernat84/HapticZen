@@ -3,6 +3,7 @@ import SwiftUI
 struct TexturePickerView: View {
     @EnvironmentObject private var appState: AppState
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -16,7 +17,7 @@ struct TexturePickerView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             Text(pack.displayNameKey)
-                                .font(.system(size: 18, weight: .bold, design: .rounded))
+                                .font(.system(.headline, design: .rounded, weight: .bold))
                                 .foregroundColor(.white)
                             
                             Spacer()
@@ -29,7 +30,7 @@ struct TexturePickerView: View {
                         }
 
                         Text(pack.descriptionKey)
-                            .font(.system(size: 13, weight: .regular, design: .rounded))
+                            .font(.system(.footnote, design: .rounded, weight: .regular))
                             .foregroundColor(.zenTextSecondary)
 
                         LazyVGrid(columns: columns, spacing: 16) {
@@ -54,7 +55,9 @@ struct TexturePickerView: View {
                 appState.selectTexture(texture)
                 dismiss()
             } else {
-                appState.isStorePresented = true
+                withAnimation(reduceMotion ? nil : .spring(response: 0.3, dampingFraction: 0.8)) {
+                    appState.openStore()
+                }
             }
         } label: {
             VStack(alignment: .leading, spacing: 10) {
@@ -75,14 +78,15 @@ struct TexturePickerView: View {
                 }
 
                 Text(texture.displayNameKey)
-                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .font(.system(.callout, design: .rounded, weight: .semibold))
                     .foregroundColor(.white)
-                    .lineLimit(1)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.85)
 
                 Text(texture.descriptionKey)
-                    .font(.system(size: 12, weight: .regular, design: .rounded))
+                    .font(.system(.caption, design: .rounded, weight: .regular))
                     .foregroundColor(.zenTextSecondary)
-                    .lineLimit(2)
+                    .lineLimit(3)
                     .multilineTextAlignment(.leading)
             }
             .padding(14)

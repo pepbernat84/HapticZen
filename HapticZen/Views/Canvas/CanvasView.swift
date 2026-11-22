@@ -3,10 +3,13 @@ import UIKit
 
 struct CanvasView: View {
     @EnvironmentObject private var appState: AppState
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @StateObject private var viewModel = CanvasViewModel()
     @State private var isPulsing = false
 
     var body: some View {
+        let pulsingActive = isPulsing && !reduceMotion
+
         GeometryReader { geometry in
             ZStack {
                 // Background dark zen palette with ambient meditative breathing glow
@@ -18,20 +21,25 @@ struct CanvasView: View {
                         .fill(
                             RadialGradient(
                                 gradient: Gradient(colors: [
-                                    Color.zenGlow.opacity(isPulsing ? 0.12 : 0.08),
-                                    Color.zenAccent.opacity(isPulsing ? 0.05 : 0.03),
+                                    Color.zenGlow.opacity(pulsingActive ? 0.12 : 0.08),
+                                    Color.zenAccent.opacity(pulsingActive ? 0.05 : 0.03),
                                     Color.clear
                                 ]),
                                 center: .center,
                                 startRadius: 20,
-                                endRadius: isPulsing ? 220 : 180
+                                endRadius: pulsingActive ? 220 : 180
                             )
                         )
-                        .frame(width: isPulsing ? 440 : 360, height: isPulsing ? 440 : 360)
+                        .frame(width: pulsingActive ? 440 : 360, height: pulsingActive ? 440 : 360)
                         .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.45)
-                        .animation(.easeInOut(duration: 4.5).repeatForever(autoreverses: true), value: isPulsing)
+                        .animation(reduceMotion ? nil : .easeInOut(duration: 4.5).repeatForever(autoreverses: true), value: pulsingActive)
                         .onAppear {
-                            isPulsing = true
+                            if !reduceMotion {
+                                isPulsing = true
+                            }
+                        }
+                        .onChange(of: reduceMotion) { isReduced in
+                            isPulsing = !isReduced
                         }
                 }
 
@@ -47,7 +55,7 @@ struct CanvasView: View {
                 // 3-Finger Tap Gesture Recognizer Layer
                 ThreeFingerTapOverlay {
                     viewModel.onDragEnded(texture: appState.preferences.selectedTexture, preferences: appState.preferences)
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                    withAnimation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.8)) {
                         appState.isMenuPresented.toggle()
                     }
                 }
@@ -59,7 +67,7 @@ struct CanvasView: View {
             .accessibilityAddTraits(.allowsDirectInteraction)
             .accessibilityAction(.magicTap) {
                 viewModel.onDragEnded(texture: appState.preferences.selectedTexture, preferences: appState.preferences)
-                withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                withAnimation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.8)) {
                     appState.isMenuPresented.toggle()
                 }
             }
@@ -70,7 +78,7 @@ struct CanvasView: View {
                         if value.startLocation.x > geometry.size.width - 35 && value.translation.width < -50 {
                             if !appState.isMenuPresented {
                                 viewModel.onDragEnded(texture: appState.preferences.selectedTexture, preferences: appState.preferences)
-                                withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                                withAnimation(reduceMotion ? nil : .spring(response: 0.4, dampingFraction: 0.8)) {
                                     appState.isMenuPresented = true
                                 }
                             }

@@ -1282,6 +1282,28 @@
         }
       }
     },
+    "store.alert.ok": {
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "D'acord"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aceptar"
+          }
+        }
+      }
+    },
     "store.banner.subtitle": {
       "localizations": {
         "ca": {
@@ -1366,6 +1388,160 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cerrar"
+          }
+        }
+      }
+    },
+    "store.error.productUnavailable": {
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aquest paquet no està disponible ara mateix. Comprova la connexió a internet i torna-ho a provar."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This pack is currently unavailable. Check your internet connection and try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este paquete no está disponible en este momento. Comprueba tu conexión a internet e inténtalo de nuevo."
+          }
+        }
+      }
+    },
+    "store.error.purchaseFailed": {
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No s'ha pogut completar la compra. Torna-ho a provar més tard."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The purchase could not be completed. Please try again later."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido completar la compra. Inténtalo de nuevo más tarde."
+          }
+        }
+      }
+    },
+    "store.error.restoreFailed": {
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No s'han pogut restaurar les compres. Comprova la connexió i torna-ho a provar."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchases could not be restored. Check your connection and try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se han podido restaurar las compras. Comprueba tu conexión e inténtalo de nuevo."
+          }
+        }
+      }
+    },
+    "store.error.title": {
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error de compra"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchase Error"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error de compra"
+          }
+        }
+      }
+    },
+    "store.error.verificationFailed": {
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No s'ha pogut verificar la compra amb l'App Store. Torna-ho a provar més tard."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The purchase could not be verified with the App Store. Please try again later."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido verificar la compra con la App Store. Inténtalo de nuevo más tarde."
+          }
+        }
+      }
+    },
+    "store.pending.message": {
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La compra està pendent d'aprovació. El paquet es desblocarà automàticament quan s'aprovi."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your purchase is awaiting approval. The pack will unlock automatically once approved."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu compra está pendiente de aprobación. El paquete se desbloqueará automáticamente cuando se apruebe."
+          }
+        }
+      }
+    },
+    "store.pending.title": {
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compra pendent"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchase Pending"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compra pendiente"
           }
         }
       }

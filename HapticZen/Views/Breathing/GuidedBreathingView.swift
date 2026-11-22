@@ -3,19 +3,27 @@ import SwiftUI
 struct GuidedBreathingView: View {
     @EnvironmentObject private var appState: AppState
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var showCloseButton: Bool = true
 
     @State private var currentPhase: BreathingPhase = .inhale
-    @State private var phaseProgress: Double = 0.0
     @State private var circleScale: CGFloat = 0.4
     @State private var isTouchingCanvas: Bool = false
     @State private var sessionStartTime: Date = Date()
-    @State private var totalMindfulSeconds: TimeInterval = 0
+    @State private var phaseStartTime: Date = Date()
+    @State private var displayedMindfulSeconds: Int = 0
     @State private var isSessionFinished: Bool = false
 
     private let hapticPlayer = BreathingHapticPlayer()
 
     private var activePattern: BreathingPattern {
         appState.preferences.selectedBreathingPattern
+    }
+
+    private var reduceMotionOpacity: Double {
+        guard reduceMotion else { return 1.0 }
+        return (currentPhase == .inhale || currentPhase == .holdIn) ? 0.95 : 0.45
     }
 
     var body: some View {
@@ -37,20 +45,22 @@ struct GuidedBreathingView: View {
                     )
                 )
                 .scaleEffect(circleScale * 1.4)
-                .animation(.easeInOut(duration: 0.1), value: circleScale)
 
             VStack(spacing: 40) {
-                // Top header with close button, pattern switcher & timer summary
+                // Top header with optional close button, pattern switcher & timer summary
                 HStack {
-                    Button {
-                        finishSessionAndDismiss()
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 28))
-                            .foregroundColor(.white.opacity(0.7))
-                    }
+                    if showCloseButton {
+                        Button {
+                            finishSessionAndDismiss()
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.title2)
+                                .foregroundColor(.white.opacity(0.7))
+                        }
+                        .accessibilityLabel(Text("accessibility.menu.close"))
 
-                    Spacer()
+                        Spacer()
+                    }
 
                     // Quick Pattern Switcher
                     Menu {
@@ -69,13 +79,15 @@ struct GuidedBreathingView: View {
                     } label: {
                         HStack(spacing: 6) {
                             Image(systemName: activePattern.iconName)
-                                .font(.system(size: 13, weight: .semibold))
+                                .font(.system(.footnote, weight: .semibold))
                                 .foregroundColor(.zenGlow)
                             Text(activePattern.displayNameKey)
-                                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                                .font(.system(.footnote, design: .rounded, weight: .semibold))
                                 .foregroundColor(.white)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.8)
                             Image(systemName: "chevron.up.chevron.down")
-                                .font(.system(size: 10, weight: .bold))
+                                .font(.system(.caption2, weight: .bold))
                                 .foregroundColor(.white.opacity(0.6))
                         }
                         .padding(.horizontal, 12)
@@ -92,9 +104,11 @@ struct GuidedBreathingView: View {
                     HStack(spacing: 6) {
                         Image(systemName: "heart.text.square.fill")
                             .foregroundColor(.zenGlow)
-                        Text(formatMindfulTime(totalMindfulSeconds))
-                            .font(.system(size: 16, weight: .semibold, design: .monospaced))
+                        Text(formatMindfulTime(TimeInterval(displayedMindfulSeconds)))
+                            .font(.system(.callout, design: .monospaced, weight: .semibold))
                             .foregroundColor(.white)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
                     }
                     .padding(.horizontal, 14)
                     .padding(.vertical, 6)
@@ -130,18 +144,25 @@ struct GuidedBreathingView: View {
                         )
                         .frame(width: 180, height: 180)
                         .scaleEffect(circleScale)
+                        .opacity(reduceMotion ? reduceMotionOpacity : 1.0)
+                        .animation(reduceMotion ? .easeInOut(duration: 0.35) : nil, value: currentPhase)
                         .shadow(color: Color.zenGlow.opacity(0.6), radius: isTouchingCanvas ? 30 : 10)
 
                     // Phase text instructions inside/above circle
                     VStack(spacing: 8) {
                         Text(LocalizedStringKey(currentPhase.rawValue))
-                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .font(.system(.title2, design: .rounded, weight: .bold))
                             .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .minimumScaleFactor(0.75)
                             .shadow(radius: 4)
 
                         Text(isTouchingCanvas ? "breathing.touching" : "breathing.instruction")
-                            .font(.system(size: 14, weight: .medium, design: .rounded))
+                            .font(.system(.subheadline, design: .rounded, weight: .medium))
                             .foregroundColor(.white.opacity(0.8))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 16)
+                            .minimumScaleFactor(0.8)
                     }
                 }
                 .frame(width: 320, height: 320)
@@ -165,12 +186,12 @@ struct GuidedBreathingView: View {
                 // Bottom guide text with active pattern info
                 VStack(spacing: 6) {
                     Text(activePattern.descriptionKey)
-                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                        .font(.system(.footnote, design: .rounded, weight: .medium))
                         .foregroundColor(.zenGlow.opacity(0.9))
                         .multilineTextAlignment(.center)
 
                     Text("breathing.footer")
-                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                        .font(.system(.caption, design: .rounded, weight: .regular))
                         .foregroundColor(.white.opacity(0.5))
                         .multilineTextAlignment(.center)
                 }
@@ -178,21 +199,21 @@ struct GuidedBreathingView: View {
                 .padding(.bottom, 30)
             }
         }
-        .onReceive(Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()) { _ in
-            guard !isSessionFinished else { return }
-            updateTimerAndPhase()
+        .task {
+            while !Task.isCancelled && !isSessionFinished {
+                try? await Task.sleep(for: .milliseconds(100), tolerance: .milliseconds(20))
+                guard !Task.isCancelled && !isSessionFinished else { break }
+                updateTimerAndPhase()
+            }
         }
         .onAppear {
             isSessionFinished = false
-            sessionStartTime = Date()
-            phaseProgress = 0
-            currentPhase = .inhale
-            circleScale = 0.4
-            if activePattern.duration(for: .inhale) <= 0 {
-                advancePhase()
-            } else {
-                announcePhase(.inhale)
-            }
+            let now = Date()
+            sessionStartTime = now
+            phaseStartTime = now
+            displayedMindfulSeconds = 0
+            circleScale = reduceMotion ? 0.75 : 0.4
+            startPhase(firstActivePhase(for: activePattern))
             if appState.preferences.isHealthKitTrackingEnabled && !HealthKitManager.shared.isAuthorized {
                 HealthKitManager.shared.requestAuthorization { success in
                     if !success {
@@ -201,43 +222,68 @@ struct GuidedBreathingView: View {
                 }
             }
         }
+        .onChange(of: reduceMotion) { isReduced in
+            if isReduced {
+                circleScale = 0.75
+            }
+        }
         .onDisappear {
             finishSessionAndDismiss()
         }
     }
 
-    private func updateTimerAndPhase() {
-        totalMindfulSeconds += 0.05
-        let duration = max(0.1, activePattern.duration(for: currentPhase))
-        phaseProgress += 0.05 / duration
+    private func firstActivePhase(for pattern: BreathingPattern) -> BreathingPhase {
+        if pattern.duration(for: .inhale) > 0 {
+            return .inhale
+        }
+        return BreathingPhase.allCases.first { pattern.duration(for: $0) > 0 } ?? .inhale
+    }
 
-        if phaseProgress >= 1.0 {
-            phaseProgress = 0.0
-            advancePhase()
+    private func startPhase(_ phase: BreathingPhase) {
+        currentPhase = phase
+        phaseStartTime = Date()
+        announcePhase(phase)
+
+        if reduceMotion {
+            withAnimation(.easeInOut(duration: 0.35)) {
+                circleScale = 0.75
+            }
+        } else {
+            let phaseDuration = activePattern.duration(for: phase)
+            let targetScale: CGFloat = (phase == .inhale || phase == .holdIn) ? 1.0 : 0.4
+            withAnimation(.easeInOut(duration: max(0.05, phaseDuration))) {
+                circleScale = targetScale
+            }
+        }
+    }
+
+    private func updateTimerAndPhase() {
+        let now = Date()
+        let elapsedWholeSeconds = Int(now.timeIntervalSince(sessionStartTime))
+        if elapsedWholeSeconds != displayedMindfulSeconds {
+            displayedMindfulSeconds = elapsedWholeSeconds
         }
 
-        // Calculate smooth visual scale
-        withAnimation(.linear(duration: 0.05)) {
-            switch currentPhase {
-            case .inhale:
-                circleScale = 0.4 + CGFloat(phaseProgress) * 0.6 // 0.4 to 1.0
-            case .holdIn:
-                circleScale = 1.0
-            case .exhale:
-                circleScale = 1.0 - CGFloat(phaseProgress) * 0.6 // 1.0 to 0.4
-            case .holdOut:
-                circleScale = 0.4
-            }
+        let duration = max(0.1, activePattern.duration(for: currentPhase))
+        let phaseElapsed = now.timeIntervalSince(phaseStartTime)
+        if phaseElapsed >= duration {
+            advancePhase()
         }
 
         // Send continuous haptic parameter updates if finger is holding the screen
         if isTouchingCanvas {
-            let isInhaling = (currentPhase == .inhale || currentPhase == .holdIn)
-            hapticPlayer.updatePhase(
-                progress: phaseProgress,
-                isInhaling: isInhaling,
-                preferences: appState.preferences
-            )
+            let activeDuration = max(0.1, activePattern.duration(for: currentPhase))
+            let progress = min(1.0, max(0.0, now.timeIntervalSince(phaseStartTime) / activeDuration))
+            switch currentPhase {
+            case .inhale:
+                hapticPlayer.updatePhase(progress: progress, isInhaling: true, preferences: appState.preferences)
+            case .holdIn:
+                hapticPlayer.updatePhase(progress: 1.0, isInhaling: true, preferences: appState.preferences)
+            case .exhale:
+                hapticPlayer.updatePhase(progress: progress, isInhaling: false, preferences: appState.preferences)
+            case .holdOut:
+                hapticPlayer.updatePhase(progress: 1.0, isInhaling: false, preferences: appState.preferences)
+            }
         }
     }
 
@@ -251,21 +297,19 @@ struct GuidedBreathingView: View {
             case .holdOut: next = .inhale
             }
         } while activePattern.duration(for: next) <= 0
-        currentPhase = next
-        announcePhase(currentPhase)
+        startPhase(next)
     }
 
     private func selectPattern(_ pattern: BreathingPattern) {
-        withAnimation(.easeInOut(duration: 0.25)) {
-            appState.preferences.selectedBreathingPattern = pattern
-            phaseProgress = 0.0
-            currentPhase = .inhale
-            circleScale = 0.4
-            if activePattern.duration(for: .inhale) <= 0 {
-                advancePhase()
-            } else {
-                announcePhase(.inhale)
-            }
+        appState.preferences.selectedBreathingPattern = pattern
+        var transaction = Transaction()
+        transaction.disablesAnimations = true
+        withTransaction(transaction) {
+            circleScale = reduceMotion ? 0.75 : 0.4
+        }
+        Task { @MainActor in
+            guard !isSessionFinished else { return }
+            startPhase(firstActivePhase(for: pattern))
         }
     }
 
@@ -278,9 +322,9 @@ struct GuidedBreathingView: View {
         guard !isSessionFinished else { return }
         isSessionFinished = true
         hapticPlayer.stopBreathingSession()
-        if totalMindfulSeconds > 5 {
-            HealthKitManager.shared.saveMindfulSession(duration: totalMindfulSeconds, preferences: appState.preferences)
-            totalMindfulSeconds = 0
+        let sessionDuration = Date().timeIntervalSince(sessionStartTime)
+        if sessionDuration > 5 {
+            HealthKitManager.shared.saveMindfulSession(duration: sessionDuration, preferences: appState.preferences)
         }
         dismiss()
     }

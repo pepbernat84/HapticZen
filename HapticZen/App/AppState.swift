@@ -49,12 +49,22 @@ class AppState: ObservableObject {
         return pack.isFree || unlockedPackIDs.contains(pack.id)
     }
 
+    /// Opens the store without triggering nested-sheet conflicts: switches to the store tab
+    /// if the menu sheet is already open, or presents the standalone store sheet otherwise.
+    func openStore() {
+        if isMenuPresented {
+            selectedMenuTab = .store
+        } else {
+            isStorePresented = true
+        }
+    }
+
     /// Selects a texture if unlocked; otherwise opens the store.
     func selectTexture(_ texture: HapticTexture) {
         if isUnlocked(texture: texture) {
             preferences.selectedTexture = texture
         } else {
-            isStorePresented = true
+            openStore()
         }
     }
 
@@ -64,13 +74,29 @@ class AppState: ObservableObject {
         UserDefaults.standard.set(Array(unlockedPackIDs), forKey: "savedUnlockedPackIDs")
     }
 
-    /// Synchronizes unlocked packs to reflect entitlements or revocations/refunds.
-    func syncUnlockedPacks(_ activePackIDs: Set<String>) {
-        var newSet = activePackIDs
+    /// Synchronizes unlocked packs with verified entitlements while preserving offline cached unlocks.
+    /// Packs are only removed when explicitly listed in `revokedPackIDs` (or when `replaceExisting` is true).
+    func syncUnlockedPacks(
+        _ activePackIDs: Set<String>,
+        revokedPackIDs: Set<String> = [],
+        replaceExisting: Bool = false
+    ) {
+        var newSet: Set<String>
+        if replaceExisting {
+            newSet = activePackIDs
+        } else {
+            newSet = unlockedPackIDs.union(activePackIDs)
+            newSet.subtract(revokedPackIDs)
+        }
         newSet.insert(TexturePack.freePack.id)
+
         if self.unlockedPackIDs != newSet {
             self.unlockedPackIDs = newSet
             UserDefaults.standard.set(Array(newSet), forKey: "savedUnlockedPackIDs")
+        }
+
+        if !isUnlocked(texture: preferences.selectedTexture) {
+            preferences.selectedTexture = .bubbleWrap
         }
     }
 
@@ -79,15 +105,18 @@ class AppState: ObservableObject {
         let action = url.host ?? url.pathComponents.last ?? ""
         switch action {
         case "breathing":
+            isStorePresented = false
             selectedMenuTab = .breathing
             isMenuPresented = true
         case "canvas":
             isMenuPresented = false
+            isStorePresented = false
         case "textures":
+            isStorePresented = false
             selectedMenuTab = .textures
             isMenuPresented = true
         case "store":
-            isStorePresented = true
+            openStore()
         default:
             break
         }

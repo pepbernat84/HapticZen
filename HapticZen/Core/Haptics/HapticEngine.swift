@@ -67,6 +67,7 @@ class HapticEngine {
         newEngine.resetHandler = { [weak self] in
             print("CHHapticEngine reset. Restarting...")
             Task { @MainActor in
+                self?.player.invalidatePlayers()
                 do {
                     try self?.engine?.start()
                     self?.isEngineStarted = true
@@ -83,6 +84,7 @@ class HapticEngine {
     func start() {
         guard supportsHaptics else { return }
         if engine == nil {
+            player.invalidatePlayers()
             do {
                 let newEngine = try CHHapticEngine()
                 setupEngineHandlers(for: newEngine)
@@ -101,6 +103,7 @@ class HapticEngine {
                 print("Failed to start CHHapticEngine: \(error)")
                 engine = nil
                 isEngineStarted = false
+                player.invalidatePlayers()
                 do {
                     let newEngine = try CHHapticEngine()
                     setupEngineHandlers(for: newEngine)

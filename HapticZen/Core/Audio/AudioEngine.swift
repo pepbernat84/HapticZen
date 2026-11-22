@@ -6,12 +6,12 @@ import UIKit
 class AudioEngine {
     static let shared = AudioEngine()
 
-    private let audioEngine = AVAudioEngine()
-    private let playerNode = AVAudioPlayerNode()
-    private let ambientPlayerNode = AVAudioPlayerNode()
-    private let varispeed = AVAudioUnitVarispeed()
-    private let eq = AVAudioUnitEQ(numberOfBands: 1)
-    private let reverb = AVAudioUnitReverb()
+    private var audioEngine = AVAudioEngine()
+    private var playerNode = AVAudioPlayerNode()
+    private var ambientPlayerNode = AVAudioPlayerNode()
+    private var varispeed = AVAudioUnitVarispeed()
+    private var eq = AVAudioUnitEQ(numberOfBands: 1)
+    private var reverb = AVAudioUnitReverb()
     
     private var isRunning = false
     private let player = AudioPlayer()
@@ -135,6 +135,13 @@ class AudioEngine {
 
     private func handleMediaServicesReset() {
         stop()
+        // Media services reset invalidates all existing AVAudioEngine and AVAudioNode instances
+        audioEngine = AVAudioEngine()
+        playerNode = AVAudioPlayerNode()
+        ambientPlayerNode = AVAudioPlayerNode()
+        varispeed = AVAudioUnitVarispeed()
+        eq = AVAudioUnitEQ(numberOfBands: 1)
+        reverb = AVAudioUnitReverb()
         setupSessionAndGraph()
         start()
     }

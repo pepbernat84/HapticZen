@@ -3,6 +3,7 @@ import SwiftUI
 struct MenuOverlayView: View {
     @EnvironmentObject private var appState: AppState
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         NavigationStack {
@@ -16,12 +17,12 @@ struct MenuOverlayView: View {
                         HStack(spacing: 12) {
                             ForEach(MenuTab.allCases, id: \.self) { tab in
                                 Button {
-                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                                    withAnimation(reduceMotion ? nil : .spring(response: 0.3, dampingFraction: 0.8)) {
                                         appState.selectedMenuTab = tab
                                     }
                                 } label: {
                                     Text(tab.rawValue)
-                                        .font(.system(size: 15, weight: appState.selectedMenuTab == tab ? .bold : .medium, design: .rounded))
+                                        .font(.system(.subheadline, design: .rounded, weight: appState.selectedMenuTab == tab ? .bold : .medium))
                                         .foregroundColor(appState.selectedMenuTab == tab ? .white : .zenTextSecondary)
                                         .padding(.vertical, 8)
                                         .padding(.horizontal, 14)
@@ -50,7 +51,7 @@ struct MenuOverlayView: View {
                         case .textures:
                             TexturePickerView()
                         case .breathing:
-                            GuidedBreathingView()
+                            GuidedBreathingView(showCloseButton: false)
                         case .store:
                             StoreViewContent()
                         case .settings:

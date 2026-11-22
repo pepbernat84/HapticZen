@@ -29,22 +29,48 @@ struct HapticZenWidgetProvider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (MindfulWidgetEntry) -> Void) {
-        let entry = currentEntry()
+        let entry = currentEntry(for: Date())
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<MindfulWidgetEntry>) -> Void) {
-        let entry = currentEntry()
+        let now = Date()
+        let entry = currentEntry(for: now)
         // Proactively refresh every 30 minutes, or instantly when main app posts WidgetCenter reload
-        let nextUpdate = Calendar.current.date(byAdding: .minute, value: 30, to: Date()) ?? Date().addingTimeInterval(1800)
-        let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+        let thirtyMinutesLater = Calendar.current.date(byAdding: .minute, value: 30, to: now) ?? now.addingTimeInterval(1800)
+
+        var entries = [entry]
+        // Schedule an automatic midnight entry so the widget resets to 0m at 00:00 even if the app isn't opened
+        if let startOfTomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: now)) {
+            entries.append(
+                MindfulWidgetEntry(
+                    date: startOfTomorrow,
+                    mindfulMinutes: 0.0,
+                    goalMinutes: entry.goalMinutes,
+                    breathingPatternShortKey: entry.breathingPatternShortKey,
+                    textureName: entry.textureName
+                )
+            )
+        }
+
+        let timeline = Timeline(entries: entries, policy: .after(thirtyMinutesLater))
         completion(timeline)
     }
 
-    private func currentEntry() -> MindfulWidgetEntry {
+    private func currentEntry(for date: Date = Date()) -> MindfulWidgetEntry {
         let appGroupID = "group.com.hapticzen"
         let defaults = UserDefaults(suiteName: appGroupID) ?? UserDefaults.standard
-        let seconds = defaults.double(forKey: "dailyMindfulSeconds")
+        let rawSeconds = defaults.double(forKey: "dailyMindfulSeconds")
+        let lastTimestamp = defaults.double(forKey: "lastSavedDate")
+
+        let seconds: Double
+        if lastTimestamp > 0 {
+            let lastDate = Date(timeIntervalSince1970: lastTimestamp)
+            seconds = Calendar.current.isDate(lastDate, inSameDayAs: date) ? rawSeconds : 0.0
+        } else {
+            seconds = rawSeconds
+        }
+
         let goalVal = defaults.integer(forKey: "dailyGoalMinutes")
         let goal = goalVal > 0 ? goalVal : 10
         let patternKey = defaults.string(forKey: "selectedBreathingPattern") ?? "paced"
@@ -58,7 +84,7 @@ struct HapticZenWidgetProvider: TimelineProvider {
         }
 
         return MindfulWidgetEntry(
-            date: Date(),
+            date: date,
             mindfulMinutes: seconds / 60.0,
             goalMinutes: goal,
             breathingPatternShortKey: patternShortKey,

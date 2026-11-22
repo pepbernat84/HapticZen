@@ -19,28 +19,33 @@ public struct SharedDataManager {
     }
 
     /// Records a completed mindful session and triggers a timeline reload on all active widgets.
-    public static func recordMindfulDuration(_ seconds: TimeInterval) {
-        checkAndResetDailyIfNewDay()
+    public static func recordMindfulDuration(_ seconds: TimeInterval, now: Date = Date()) {
+        checkAndResetDailyIfNewDay(referenceDate: now)
         let current = sharedDefaults.double(forKey: Keys.dailyMindfulSeconds)
         let updated = current + seconds
         sharedDefaults.set(updated, forKey: Keys.dailyMindfulSeconds)
-        sharedDefaults.set(Date().timeIntervalSince1970, forKey: Keys.lastSavedDate)
+        sharedDefaults.set(now.timeIntervalSince1970, forKey: Keys.lastSavedDate)
         reloadWidgets()
     }
 
     /// Synchronizes current user preferences to shared storage for widgets.
-    public static func sync(from preferences: UserPreferences) {
-        checkAndResetDailyIfNewDay()
-        sharedDefaults.set(preferences.dailyMindfulSeconds, forKey: Keys.dailyMindfulSeconds)
+    static func sync(from preferences: UserPreferences, now: Date = Date()) {
+        let didReset = checkAndResetDailyIfNewDay(referenceDate: now)
+        if didReset {
+            preferences.dailyMindfulSeconds = 0.0
+        }
+        let syncedSeconds = max(sharedDefaults.double(forKey: Keys.dailyMindfulSeconds), preferences.dailyMindfulSeconds)
+        sharedDefaults.set(syncedSeconds, forKey: Keys.dailyMindfulSeconds)
+        preferences.dailyMindfulSeconds = syncedSeconds
         sharedDefaults.set(preferences.selectedBreathingPattern.rawValue, forKey: Keys.selectedBreathingPattern)
         sharedDefaults.set(preferences.selectedTexture.id, forKey: Keys.selectedTextureID)
-        sharedDefaults.set(Date().timeIntervalSince1970, forKey: Keys.lastSavedDate)
+        sharedDefaults.set(now.timeIntervalSince1970, forKey: Keys.lastSavedDate)
         reloadWidgets()
     }
 
     /// Returns the accumulated mindful seconds for today.
-    public static func getDailyMindfulSeconds() -> Double {
-        checkAndResetDailyIfNewDay()
+    public static func getDailyMindfulSeconds(for date: Date = Date()) -> Double {
+        checkAndResetDailyIfNewDay(referenceDate: date)
         return sharedDefaults.double(forKey: Keys.dailyMindfulSeconds)
     }
 
@@ -74,13 +79,16 @@ public struct SharedDataManager {
     }
 
     /// Resets mindful seconds at the start of a new calendar day.
-    private static func checkAndResetDailyIfNewDay() {
+    @discardableResult
+    private static func checkAndResetDailyIfNewDay(referenceDate: Date = Date()) -> Bool {
         let lastTimestamp = sharedDefaults.double(forKey: Keys.lastSavedDate)
-        guard lastTimestamp > 0 else { return }
+        guard lastTimestamp > 0 else { return false }
         let lastDate = Date(timeIntervalSince1970: lastTimestamp)
-        if !Calendar.current.isDateInToday(lastDate) {
+        if !Calendar.current.isDate(lastDate, inSameDayAs: referenceDate) {
             sharedDefaults.set(0.0, forKey: Keys.dailyMindfulSeconds)
-            sharedDefaults.set(Date().timeIntervalSince1970, forKey: Keys.lastSavedDate)
+            sharedDefaults.set(referenceDate.timeIntervalSince1970, forKey: Keys.lastSavedDate)
+            return true
         }
+        return false
     }
 }

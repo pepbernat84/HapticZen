@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Haptic Zen — Privacy Policy &amp; Support</title>
+  <style>
+    :root {
+      --zen-dark: #0A0D14;
+      --zen-card: #161B29;
+      --zen-glow: #59A6F2;
+      --zen-accent: #4080D9;
+      --zen-text: #F2F5FA;
+      --zen-muted: #A6B0C3;
+      --zen-border: rgba(255, 255, 255, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Rounded", "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at 50% 0%, rgba(89, 166, 242, 0.14), transparent 55%), var(--zen-dark);
+      color: var(--zen-text);
+      line-height: 1.65;
+    }
+
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 40px 20px 72px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--zen-muted);
+      font-size: 1rem;
+    }
+
+    nav.lang-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 24px 0 32px;
+    }
+
+    nav.lang-bar a,
+    nav.lang-bar button {
+      background: var(--zen-card);
+      color: var(--zen-text);
+      border: 1px solid var(--zen-border);
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    nav.lang-bar button[aria-pressed="true"],
+    nav.lang-bar a:hover,
+    nav.lang-bar button:hover {
+      border-color: var(--zen-glow);
+      background: rgba(89, 166, 242, 0.18);
+    }
+
+    section.card {
+      background: var(--zen-card);
+      border: 1px solid var(--zen-border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      color: var(--zen-glow);
+    }
+
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 1.05rem;
+      color: var(--zen-text);
+    }
+
+    p, li {
+      color: var(--zen-muted);
+      font-size: 0.97rem;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin: 8px 0 14px;
+    }
+
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--zen-text);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 0.88em;
+    }
+
+    a {
+      color: var(--zen-glow);
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: rgba(89, 166, 242, 0.16);
+      color: var(--zen-glow);
+      border: 1px solid rgba(89, 166, 242, 0.35);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--zen-muted);
+      font-size: 0.85rem;
+      margin-top: 32px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Haptic Zen</h1>
+      <p class="subtitle">Privacy Policy &amp; Support / Política de Privadesa i Suport / Política de Privacidad y Soporte</p>
+      <span class="badge">Zero Data Collection • 100% On-Device</span>
+    </header>
+
+    <nav class="lang-bar" aria-label="Language selection">
+      <button type="button" data-lang="all" aria-pressed="true" onclick="filterLang('all')">All / Tots</button>
+      <button type="button" data-lang="ca" aria-pressed="false" onclick="filterLang('ca')">Català</button>
+      <button type="button" data-lang="en" aria-pressed="false" onclick="filterLang('en')">English</button>
+      <button type="button" data-lang="es" aria-pressed="false" onclick="filterLang('es')">Español</button>
+    </nav>
+
+    <section id="ca" class="card lang-section" lang="ca">
+      <h2>Política de Privadesa i Suport (Català)</h2>
+      <p><strong>Última actualització:</strong> Novembre de 2026</p>
+      <p>A <strong>Haptic Zen</strong> respectem plenament la teva privadesa. L'aplicació està dissenyada per funcionar íntegrament al teu iPhone sense recollir ni transmetre dades personals.</p>
+
+      <h3>1. Dades recollides</h3>
+      <ul>
+        <li><strong>Cap dada personal:</strong> No recollim noms, correus electrònics, identificadors publicitaris, ubicació ni analítica d'ús.</li>
+        <li><strong>Sense SDKs de tercers:</strong> No integrem biblioteques de seguiment ni xarxes publicitàries.</li>
+      </ul>
+
+      <h3>2. Emmagatzematge local i Widgets</h3>
+      <p>Les preferències de l'aplicació (textura escollida, intensitat hàptica, volum, objectiu diari i minuts de calma del dia) es desen exclusivament al teu dispositiu mitjançant <code>UserDefaults</code> i l'App Group local <code>group.com.hapticzen</code> perquè els widgets de la pantalla d'inici i bloqueig puguin mostrar el teu progrés.</p>
+
+      <h3>3. Integració opcional amb Apple Health (HealthKit)</h3>
+      <p>Si actives manualment la sincronització amb <strong>Apple Health</strong> als paràmetres, Haptic Zen sol·licitarà permís per desar les sessions de respiració i relaxació de més de 5 segons com a <em>Minuts de Mindfulness</em> a l'app Salut d'Apple. Aquestes dades mai no surten del teu dispositiu ni es comparteixen amb tercers.</p>
+
+      <h3>4. Compres integrades (StoreKit 2)</h3>
+      <p>Els paquets opcionals de textures (<em>Paquet Mecànic</em> i <em>Paquet Natural</em>) es processen directament mitjançant l'App Store d'Apple. Haptic Zen no té accés a la teva informació bancària ni de pagament.</p>
+
+      <h3>5. Suport tècnic i ajuda ràpida</h3>
+      <ul>
+        <li><strong>Com obrir el menú:</strong> Toca amb <strong>3 dits</strong> sobre el llenç o fes un <strong>lliscament cap a l'esquerra des de la vora dreta</strong> de la pantalla (també disponible amb <em>Magic Tap</em> de VoiceOver).</li>
+        <li><strong>Restaurar compres:</strong> Obre el menú &rarr; <em>Botiga</em> &rarr; prem <em>Restaurar Compres</em>.</li>
+        <li><strong>Contacte:</strong> <a href="mailto:pepbernat@me.com">pepbernat@me.com</a></li>
+      </ul>
+    </section>
+
+    <section id="en" class="card lang-section" lang="en">
+      <h2>Privacy Policy &amp; Support (English)</h2>
+      <p><strong>Last updated:</strong> November 2026</p>
+      <p><strong>Haptic Zen</strong> is built with privacy at its core. The app runs entirely on-device and does not collect, track, or transmit personal data.</p>
+
+      <h3>1. Data Collection</h3>
+      <ul>
+        <li><strong>Zero personal data collected:</strong> We do not collect names, email addresses, advertising identifiers, location, or usage analytics.</li>
+        <li><strong>No third-party tracking SDKs:</strong> Haptic Zen contains no ads and no third-party analytics frameworks.</li>
+      </ul>
+
+      <h3>2. Local Storage &amp; Widgets</h3>
+      <p>Your preferences (selected texture, haptic intensity, audio settings, daily goal, and daily mindful seconds) are stored solely on your device using <code>UserDefaults</code> and the local App Group container <code>group.com.hapticzen</code> so Home Screen and Lock Screen widgets stay synchronized.</p>
+
+      <h3>3. Optional Apple Health (HealthKit) Integration</h3>
+      <p>If you choose to enable <strong>Sync with Apple Health</strong> in Settings, Haptic Zen asks permission to save relaxation and breathing sessions longer than 5 seconds as <em>Mindful Minutes</em> in Apple Health. Health data is never transmitted outside your device or shared with third parties.</p>
+
+      <h3>4. In-App Purchases (StoreKit 2)</h3>
+      <p>Optional texture packs (<em>Mechanical Pack</em> and <em>Nature Pack</em>) are processed securely by Apple via StoreKit 2. Haptic Zen never sees or stores payment details.</p>
+
+      <h3>5. Support &amp; Quick Tips</h3>
+      <ul>
+        <li><strong>Opening the menu:</strong> Tap anywhere with <strong>3 fingers</strong> or <strong>swipe left from the right edge</strong> of the screen (VoiceOver <em>Magic Tap</em> is also supported).</li>
+        <li><strong>Restore purchases:</strong> Open Menu &rarr; <em>Store</em> &rarr; tap <em>Restore Purchases</em>.</li>
+        <li><strong>Contact:</strong> <a href="mailto:pepbernat@me.com">pepbernat@me.com</a></li>
+      </ul>
+    </section>
+
+    <section id="es" class="card lang-section" lang="es">
+      <h2>Política de Privacidad y Soporte (Español)</h2>
+      <p><strong>Última actualización:</strong> Noviembre de 2026</p>
+      <p>En <strong>Haptic Zen</strong> respetamos al máximo tu privacidad. La aplicación funciona íntegramente en tu iPhone sin recopilar ni enviar datos personales.</p>
+
+      <h3>1. Datos recopilados</h3>
+      <ul>
+        <li><strong>Ningún dato personal:</strong> No recopilamos nombres, correos electrónicos, identificadores publicitarios, ubicación ni analíticas de uso.</li>
+        <li><strong>Sin SDKs de terceros:</strong> No integramos rastreadores ni redes publicitarias.</li>
+      </ul>
+
+      <h3>2. Almacenamiento local y Widgets</h3>
+      <p>Tus preferencias (textura seleccionada, intensidad háptica, ajustes de audio, objetivo diario y progreso de calma) se guardan exclusivamente en tu dispositivo mediante <code>UserDefaults</code> y el App Group local <code>group.com.hapticzen</code> para actualizar los widgets de pantalla de inicio y bloqueo.</p>
+
+      <h3>3. Integración opcional con Apple Health (HealthKit)</h3>
+      <p>Si activas manualmente <strong>Sincronizar con Apple Health</strong> en Ajustes, Haptic Zen solicitará permiso para guardar sesiones de respiración y relajación de más de 5 segundos como <em>Minutos de Mindfulness</em> en la app Salud de Apple. Estos datos nunca salen de tu dispositivo ni se comparten con terceros.</p>
+
+      <h3>4. Compras integradas (StoreKit 2)</h3>
+      <p>Los paquetes opcionales de texturas (<em>Paquete Mecánico</em> y <em>Paquete Naturaleza</em>) se gestionan directamente a través del App Store de Apple mediante StoreKit 2.</p>
+
+      <h3>5. Soporte técnico y ayuda rápida</h3>
+      <ul>
+        <li><strong>Cómo abrir el menú:</strong> Toca con <strong>3 dedos</strong> sobre el lienzo o <strong>desliza hacia la izquierda desde el borde derecho</strong> de la pantalla (también compatible con <em>Magic Tap</em> de VoiceOver).</li>
+        <li><strong>Restaurar compras:</strong> Abre el Menú &rarr; <em>Tienda</em> &rarr; pulsa <em>Restaurar Compras</em>.</li>
+        <li><strong>Contacto:</strong> <a href="mailto:pepbernat@me.com">pepbernat@me.com</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      &copy; 2026 Haptic Zen
+    </footer>
+  </main>
+
+  <script>
+    function filterLang(lang) {
+      var sections = document.querySelectorAll(".lang-section");
+      for (var i = 0; i < sections.length; i++) {
+        var el = sections[i];
+        el.style.display = (lang === "all" || el.id === lang) ? "block" : "none";
+      }
+      var buttons = document.querySelectorAll("nav.lang-bar button");
+      for (var j = 0; j < buttons.length; j++) {
+        buttons[j].setAttribute("aria-pressed", buttons[j].getAttribute("data-lang") === lang ? "true" : "false");
+      }
+    }
+  </script>
+</body>
+</html>

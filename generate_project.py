@@ -1,10 +1,31 @@
+import argparse
 import os
 import hashlib
 import json
+import re
+from typing import Optional
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.join(ROOT_DIR, "HapticZen.xcodeproj")
 PBXPROJ_PATH = os.path.join(PROJECT_DIR, "project.pbxproj")
+
+def resolve_team_id(cli_team_id: Optional[str]) -> str:
+    """Resolve Apple Developer Team ID from CLI flag, environment, or existing pbxproj."""
+    if cli_team_id is not None:
+        return cli_team_id.strip()
+
+    env_team = os.environ.get("DEVELOPMENT_TEAM", "").strip()
+    if env_team:
+        return env_team
+
+    if os.path.exists(PBXPROJ_PATH):
+        with open(PBXPROJ_PATH, "r", encoding="utf-8") as f:
+            content = f.read()
+        match = re.search(r"DEVELOPMENT_TEAM\s*=\s*([A-Z0-9]+);", content)
+        if match:
+            return match.group(1)
+
+    return ""
 
 def gen_uuid(key: str) -> str:
     return hashlib.md5(key.encode("utf-8")).hexdigest()[:24].upper()
@@ -46,8 +67,10 @@ def scan_dir(base_dir, current_path=""):
             items.append({"name": rel_path, "type": "file", "basename": rel_path})
     return items
 
-def create_pbxproj():
+def create_pbxproj(team_id: str = ""):
     os.makedirs(PROJECT_DIR, exist_ok=True)
+    target_attr_team_line = f"\n\t\t\t\t\t\tDevelopmentTeam = {team_id};" if team_id else ""
+    build_setting_team_line = f"\n\t\t\t\tDEVELOPMENT_TEAM = {team_id};" if team_id else ""
     
     app_files = scan_dir(os.path.join(ROOT_DIR, "HapticZen"))
     test_files = scan_dir(os.path.join(ROOT_DIR, "HapticZenTests"))
@@ -485,14 +508,14 @@ def create_pbxproj():
 \t\t\t\tOrganizationName = HapticZen;
 \t\t\t\tTargetAttributes = {{
 \t\t\t\t\t{target_uuid} = {{
-\t\t\t\t\t\tCreatedOnToolsVersion = 15.0;
+\t\t\t\t\t\tCreatedOnToolsVersion = 15.0;{target_attr_team_line}
 \t\t\t\t\t}};
 \t\t\t\t\t{tests_target_uuid} = {{
-\t\t\t\t\t\tCreatedOnToolsVersion = 15.0;
+\t\t\t\t\t\tCreatedOnToolsVersion = 15.0;{target_attr_team_line}
 \t\t\t\t\t\tTestTargetID = {target_uuid};
 \t\t\t\t\t}};
 \t\t\t\t\t{widgets_target_uuid} = {{
-\t\t\t\t\t\tCreatedOnToolsVersion = 15.0;
+\t\t\t\t\t\tCreatedOnToolsVersion = 15.0;{target_attr_team_line}
 \t\t\t\t\t}};
 \t\t\t\t}};
 \t\t\t}};
@@ -645,7 +668,7 @@ def create_pbxproj():
 \t\t\t\tASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 \t\t\t\tCODE_SIGN_ENTITLEMENTS = "HapticZen/HapticZen.entitlements";
 \t\t\t\tCODE_SIGN_STYLE = Automatic;
-\t\t\t\tCURRENT_PROJECT_VERSION = 1;
+\t\t\t\tCURRENT_PROJECT_VERSION = 1;{build_setting_team_line}
 \t\t\t\tDEVELOPMENT_ASSET_PATHS = "HapticZen/PreviewContent";
 \t\t\t\tENABLE_PREVIEWS = YES;
 \t\t\t\tGENERATE_INFOPLIST_FILE = YES;
@@ -675,7 +698,7 @@ def create_pbxproj():
 \t\t\t\tASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 \t\t\t\tCODE_SIGN_ENTITLEMENTS = "HapticZen/HapticZen.entitlements";
 \t\t\t\tCODE_SIGN_STYLE = Automatic;
-\t\t\t\tCURRENT_PROJECT_VERSION = 1;
+\t\t\t\tCURRENT_PROJECT_VERSION = 1;{build_setting_team_line}
 \t\t\t\tDEVELOPMENT_ASSET_PATHS = "HapticZen/PreviewContent";
 \t\t\t\tENABLE_PREVIEWS = YES;
 \t\t\t\tGENERATE_INFOPLIST_FILE = YES;
@@ -703,7 +726,7 @@ def create_pbxproj():
 \t\t\tbuildSettings = {{
 \t\t\t\tCODE_SIGN_ENTITLEMENTS = "HapticZenWidgets/HapticZenWidget.entitlements";
 \t\t\t\tCODE_SIGN_STYLE = Automatic;
-\t\t\t\tCURRENT_PROJECT_VERSION = 1;
+\t\t\t\tCURRENT_PROJECT_VERSION = 1;{build_setting_team_line}
 \t\t\t\tGENERATE_INFOPLIST_FILE = YES;
 \t\t\t\tINFOPLIST_KEY_CFBundleDisplayName = "Haptic Zen";
 \t\t\t\tINFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
@@ -728,7 +751,7 @@ def create_pbxproj():
 \t\t\tbuildSettings = {{
 \t\t\t\tCODE_SIGN_ENTITLEMENTS = "HapticZenWidgets/HapticZenWidget.entitlements";
 \t\t\t\tCODE_SIGN_STYLE = Automatic;
-\t\t\t\tCURRENT_PROJECT_VERSION = 1;
+\t\t\t\tCURRENT_PROJECT_VERSION = 1;{build_setting_team_line}
 \t\t\t\tGENERATE_INFOPLIST_FILE = YES;
 \t\t\t\tINFOPLIST_KEY_CFBundleDisplayName = "Haptic Zen";
 \t\t\t\tINFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
@@ -753,7 +776,7 @@ def create_pbxproj():
 \t\t\tbuildSettings = {{
 \t\t\t\tBUNDLE_LOADER = "$(TEST_HOST)";
 \t\t\t\tCODE_SIGN_STYLE = Automatic;
-\t\t\t\tCURRENT_PROJECT_VERSION = 1;
+\t\t\t\tCURRENT_PROJECT_VERSION = 1;{build_setting_team_line}
 \t\t\t\tGENERATE_INFOPLIST_FILE = YES;
 \t\t\t\tMARKETING_VERSION = 1.0;
 \t\t\t\tPRODUCT_BUNDLE_IDENTIFIER = com.hapticzen.tests;
@@ -770,7 +793,7 @@ def create_pbxproj():
 \t\t\tbuildSettings = {{
 \t\t\t\tBUNDLE_LOADER = "$(TEST_HOST)";
 \t\t\t\tCODE_SIGN_STYLE = Automatic;
-\t\t\t\tCURRENT_PROJECT_VERSION = 1;
+\t\t\t\tCURRENT_PROJECT_VERSION = 1;{build_setting_team_line}
 \t\t\t\tGENERATE_INFOPLIST_FILE = YES;
 \t\t\t\tMARKETING_VERSION = 1.0;
 \t\t\t\tPRODUCT_BUNDLE_IDENTIFIER = com.hapticzen.tests;
@@ -898,6 +921,9 @@ def create_xcscheme(target_uuid: str, tests_target_uuid: str):
             ReferencedContainer = "container:HapticZen.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <StoreKitConfigurationFileReference
+         identifier = "../../HapticZenTests/HapticZen.storekit">
+      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -930,4 +956,12 @@ def create_xcscheme(target_uuid: str, tests_target_uuid: str):
     print(f"Generated scheme at {scheme_path}")
 
 if __name__ == "__main__":
-    create_pbxproj()
+    parser = argparse.ArgumentParser(description="Generate HapticZen Xcode project and shared scheme.")
+    parser.add_argument(
+        "--team-id",
+        default=None,
+        help="Apple Developer Team ID (10-char alphanumeric). Pass empty string to clear."
+    )
+    args = parser.parse_args()
+    resolved_team_id = resolve_team_id(args.team_id)
+    create_pbxproj(team_id=resolved_team_id)

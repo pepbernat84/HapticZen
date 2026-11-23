@@ -132,6 +132,21 @@ struct SettingsView: View {
                                 .tint(.zenGlow)
                         }
                         .padding(.vertical, 4)
+
+                        Picker(selection: $appState.preferences.sleepTimerMinutes) {
+                            Text("settings.soundscape.sleepTimer.off").tag(0)
+                            ForEach(UserPreferences.sleepTimerOptions.filter { $0 > 0 }, id: \.self) { minutes in
+                                Text("settings.wellness.dailyGoal.minutes \(minutes)").tag(minutes)
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemName: "moon.zzz.fill")
+                                    .foregroundColor(.zenGlow)
+                                Text("settings.soundscape.sleepTimer")
+                                    .font(.system(.subheadline, design: .rounded, weight: .medium))
+                            }
+                        }
+                        .pickerStyle(.menu)
                     }
                 }
             } header: {
@@ -167,6 +182,18 @@ struct SettingsView: View {
                     }
                 }
                 .pickerStyle(.menu)
+
+                HStack {
+                    Image(systemName: "flame.fill")
+                        .foregroundColor(.zenGlow)
+                    Text("settings.wellness.streak")
+                        .font(.system(.subheadline, design: .rounded, weight: .medium))
+                        .foregroundColor(.white)
+                    Spacer()
+                    Text("settings.wellness.streak.days \(SharedDataManager.getCurrentStreakDays())")
+                        .font(.system(.footnote, design: .monospaced, weight: .semibold))
+                        .foregroundColor(.zenGlow)
+                }
 
                 Toggle(isOn: $appState.preferences.isHealthKitTrackingEnabled) {
                     HStack {
@@ -239,6 +266,9 @@ struct SettingsView: View {
         }
         .onChange(of: appState.preferences.soundscapeVolume) { _ in
             updateAudioEngineSoundscape()
+        }
+        .onChange(of: appState.preferences.sleepTimerMinutes) { minutes in
+            AudioEngine.shared.setSleepTimer(minutes: minutes, preferences: appState.preferences)
         }
         .onChange(of: appState.preferences.dailyGoalMinutes) { newGoal in
             SharedDataManager.dailyGoalMinutes = newGoal

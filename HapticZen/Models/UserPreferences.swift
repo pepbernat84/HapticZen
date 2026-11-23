@@ -5,6 +5,7 @@ import SwiftUI
 /// User preferences backed by `UserDefaults` with `@Published` reactivity so `AppState` receives all updates reliably.
 class UserPreferences: ObservableObject {
     static let dailyGoalOptions: [Int] = [5, 10, 15, 20, 30, 45, 60]
+    static let sleepTimerOptions: [Int] = [0, 5, 10, 15, 30, 45, 60]
 
     private enum Keys {
         static let selectedTextureID = "selectedTextureID"
@@ -90,6 +91,16 @@ class UserPreferences: ObservableObject {
 
     @Published var selectedBreathingPatternString: String {
         didSet { defaults.set(selectedBreathingPatternString, forKey: Keys.selectedBreathingPattern) }
+    }
+
+    /// Session-only sleep timer duration in minutes (`0` means disabled).
+    @Published var sleepTimerMinutes: Int = 0 {
+        didSet {
+            let clamped = max(0, min(180, sleepTimerMinutes))
+            if sleepTimerMinutes != clamped {
+                sleepTimerMinutes = clamped
+            }
+        }
     }
 
     init(defaults: UserDefaults = .standard) {

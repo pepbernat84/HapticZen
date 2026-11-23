@@ -37,3 +37,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 .venv/
+
+# Generated App Store promotional screenshots (regenerate via scripts/generate_screenshots.swift)
+docs/screenshots/

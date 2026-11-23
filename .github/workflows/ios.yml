@@ -1,0 +1,51 @@
+name: iOS CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-validate:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate Localizable.xcstrings
+        run: |
+          python3 - <<'EOF'
+          import json
+
+          path = "HapticZen/Resources/Localizable.xcstrings"
+          with open(path, "r", encoding="utf-8") as f:
+              data = json.load(f)
+
+          missing = []
+          for key, item in data.get("strings", {}).items():
+              if key == "":
+                  continue
+              locs = item.get("localizations", {})
+              for lang in ["ca", "en", "es"]:
+                  unit = locs.get(lang, {}).get("stringUnit", {})
+                  if not unit.get("value") or unit.get("state") != "translated":
+                      missing.append((key, lang))
+
+          assert not missing, f"Incomplete translations: {missing}"
+          print(f"Validated {len(data.get('strings', {})) - 1} localization keys across ca, en, es.")
+          EOF
+
+      - name: Regenerate Xcode project
+        run: python3 generate_project.py --team-id ""
+
+      - name: Select Xcode
+        run: xcode-select -p && xcodebuild -version
+
+      - name: Build HapticZen & Widgets (Simulator)
+        run: |
+          xcodebuild build \
+            -scheme HapticZen \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO

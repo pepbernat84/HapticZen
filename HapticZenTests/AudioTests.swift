@@ -91,4 +91,20 @@ final class AudioTests: XCTestCase {
         XCTAssertGreaterThan(mid, 500.0)
         XCTAssertLessThan(mid, 20000.0)
     }
+
+    @MainActor
+    func testSleepTimerConfigurationAndCancellation() {
+        let engine = AudioEngine.shared
+        engine.setSleepTimer(minutes: 0)
+        XCTAssertEqual(engine.sleepTimerMinutes, 0)
+        XCTAssertNil(engine.sleepTimerEndDate)
+
+        engine.setSleepTimer(minutes: 15)
+        XCTAssertEqual(engine.sleepTimerMinutes, 15)
+        XCTAssertNotNil(engine.sleepTimerEndDate)
+
+        engine.setSleepTimer(minutes: 0)
+        XCTAssertEqual(engine.sleepTimerMinutes, 0)
+        XCTAssertNil(engine.sleepTimerEndDate)
+    }
 }

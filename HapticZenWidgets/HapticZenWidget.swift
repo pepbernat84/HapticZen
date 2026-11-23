@@ -118,6 +118,16 @@ struct HapticZenWidgetEntryView: View {
 
                     Spacer()
 
+                    if entry.streakDays > 0 {
+                        HStack(spacing: 3) {
+                            Image(systemName: "flame.fill")
+                                .font(.system(size: 10, weight: .bold))
+                            Text("\(entry.streakDays)d")
+                                .font(.system(size: 11, weight: .bold, design: .rounded))
+                        }
+                        .foregroundColor(zenGlow)
+                    }
+
                     Text("\(Int(entry.progress * 100))%")
                         .font(.system(size: 12, weight: .bold, design: .monospaced))
                         .foregroundColor(zenGlow)

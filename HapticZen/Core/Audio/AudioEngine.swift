@@ -19,6 +19,10 @@ class AudioEngine {
     private weak var cachedPreferences: UserPreferences?
     private var observers: [AnyObject] = []
 
+    private(set) var sleepTimerMinutes: Int = 0
+    private(set) var sleepTimerEndDate: Date? = nil
+    private var sleepTimerTask: Task<Void, Never>? = nil
+
     private init() {
         setupSessionAndGraph()
         setupNotificationObservers()
@@ -166,6 +170,11 @@ class AudioEngine {
     }
 
     func stop() {
+        sleepTimerTask?.cancel()
+        sleepTimerTask = nil
+        sleepTimerMinutes = 0
+        sleepTimerEndDate = nil
+
         player.stop(playerNode: playerNode)
         ambientPlayerNode.stop()
         activeSoundscapeID = nil
@@ -227,6 +236,59 @@ class AudioEngine {
             } else {
                 activeSoundscapeID = nil
             }
+        }
+    }
+
+    /// Configures a smooth fade-out sleep timer for the background soundscape. Pass `0` to cancel.
+    func setSleepTimer(minutes: Int, preferences: UserPreferences? = nil) {
+        sleepTimerTask?.cancel()
+        sleepTimerTask = nil
+
+        if let prefs = preferences {
+            cachedPreferences = prefs
+        }
+
+        guard minutes > 0 else {
+            sleepTimerMinutes = 0
+            sleepTimerEndDate = nil
+            ambientPlayerNode.volume = Float((preferences ?? cachedPreferences)?.soundscapeVolume ?? 0.4)
+            return
+        }
+
+        let clamped = max(1, min(180, minutes))
+        sleepTimerMinutes = clamped
+        let totalSeconds = TimeInterval(clamped * 60)
+        sleepTimerEndDate = Date().addingTimeInterval(totalSeconds)
+
+        sleepTimerTask = Task { @MainActor [weak self, weak preferences] in
+            guard let self = self else { return }
+            let fadeDuration = min(10.0, totalSeconds * 0.25)
+            let waitDuration = max(0, totalSeconds - fadeDuration)
+
+            if waitDuration > 0 {
+                try? await Task.sleep(nanoseconds: UInt64(waitDuration * 1_000_000_000))
+            }
+            guard !Task.isCancelled else { return }
+
+            let steps = 20
+            let stepDuration = fadeDuration / Double(steps)
+            let initialVolume = self.ambientPlayerNode.volume
+
+            for step in 1...steps {
+                guard !Task.isCancelled else { return }
+                let remainingRatio = Float(steps - step) / Float(steps)
+                self.ambientPlayerNode.volume = initialVolume * remainingRatio
+                if stepDuration > 0 {
+                    try? await Task.sleep(nanoseconds: UInt64(stepDuration * 1_000_000_000))
+                }
+            }
+            guard !Task.isCancelled else { return }
+
+            self.ambientPlayerNode.stop()
+            self.activeSoundscapeID = nil
+            self.sleepTimerMinutes = 0
+            self.sleepTimerEndDate = nil
+            (preferences ?? self.cachedPreferences)?.sleepTimerMinutes = 0
         }
     }
 }

@@ -7,7 +7,9 @@ final class SharedDataManagerTests: XCTestCase {
         "dailyGoalMinutes",
         "lastSavedDate",
         "selectedBreathingPattern",
-        "selectedTextureID"
+        "selectedTextureID",
+        "currentStreakDays",
+        "lastStreakDate"
     ]
 
     override func setUp() {
@@ -93,5 +95,33 @@ final class SharedDataManagerTests: XCTestCase {
 
         XCTAssertEqual(SharedDataManager.getDailyMindfulSeconds(for: today), 0.0, accuracy: 0.01)
         XCTAssertEqual(prefs.dailyMindfulSeconds, 0.0, accuracy: 0.01)
+    }
+
+    func testDailyStreakIncrementsOnConsecutiveDaysAndResetsAfterGap() throws {
+        let day1 = Date(timeIntervalSince1970: 1_763_800_000)
+        let day2 = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: 1, to: day1))
+        let day3 = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: 2, to: day1))
+        let day5 = try XCTUnwrap(Calendar.current.date(byAdding: .day, value: 4, to: day1))
+
+        XCTAssertEqual(SharedDataManager.getCurrentStreakDays(for: day1), 0)
+
+        SharedDataManager.recordMindfulDuration(60.0, now: day1)
+        XCTAssertEqual(SharedDataManager.getCurrentStreakDays(for: day1), 1)
+
+        // Recording again on the same day keeps streak at 1
+        SharedDataManager.recordMindfulDuration(30.0, now: day1)
+        XCTAssertEqual(SharedDataManager.getCurrentStreakDays(for: day1), 1)
+
+        // Consecutive days increment streak
+        SharedDataManager.recordMindfulDuration(45.0, now: day2)
+        XCTAssertEqual(SharedDataManager.getCurrentStreakDays(for: day2), 2)
+
+        SharedDataManager.recordMindfulDuration(45.0, now: day3)
+        XCTAssertEqual(SharedDataManager.getCurrentStreakDays(for: day3), 3)
+
+        // Missing a full calendar day resets active streak to 0 until a new session starts it at 1
+        XCTAssertEqual(SharedDataManager.getCurrentStreakDays(for: day5), 0)
+        SharedDataManager.recordMindfulDuration(45.0, now: day5)
+        XCTAssertEqual(SharedDataManager.getCurrentStreakDays(for: day5), 1)
     }
 }

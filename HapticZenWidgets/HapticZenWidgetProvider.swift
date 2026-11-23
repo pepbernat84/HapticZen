@@ -9,6 +9,7 @@ struct MindfulWidgetEntry: TimelineEntry {
     let goalMinutes: Int
     let breathingPatternShortKey: LocalizedStringKey
     let textureName: String
+    var streakDays: Int = 0
 
     var progress: Double {
         guard goalMinutes > 0 else { return 0 }
@@ -75,6 +76,19 @@ struct HapticZenWidgetProvider: TimelineProvider {
         let goal = goalVal > 0 ? goalVal : 10
         let patternKey = defaults.string(forKey: "selectedBreathingPattern") ?? "paced"
 
+        let rawStreak = defaults.integer(forKey: "currentStreakDays")
+        let lastStreakTimestamp = defaults.double(forKey: "lastStreakDate")
+        let streakDays: Int
+        if rawStreak > 0, lastStreakTimestamp > 0 {
+            let calendar = Calendar.current
+            let lastStart = calendar.startOfDay(for: Date(timeIntervalSince1970: lastStreakTimestamp))
+            let targetStart = calendar.startOfDay(for: date)
+            let dayDiff = calendar.dateComponents([.day], from: lastStart, to: targetStart).day ?? -1
+            streakDays = (dayDiff == 0 || dayDiff == 1) ? rawStreak : 0
+        } else {
+            streakDays = 0
+        }
+
         let patternShortKey: LocalizedStringKey
         switch patternKey {
         case "box": patternShortKey = "breathing.pattern.box.short"
@@ -88,7 +102,8 @@ struct HapticZenWidgetProvider: TimelineProvider {
             mindfulMinutes: seconds / 60.0,
             goalMinutes: goal,
             breathingPatternShortKey: patternShortKey,
-            textureName: "Haptic Zen"
+            textureName: "Haptic Zen",
+            streakDays: streakDays
         )
     }
 }

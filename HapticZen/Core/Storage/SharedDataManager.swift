@@ -16,6 +16,8 @@ public struct SharedDataManager {
         static let selectedBreathingPattern = "selectedBreathingPattern"
         static let selectedTextureID = "selectedTextureID"
         static let lastSavedDate = "lastSavedDate"
+        static let currentStreakDays = "currentStreakDays"
+        static let lastStreakDate = "lastStreakDate"
     }
 
     /// Records a completed mindful session and triggers a timeline reload on all active widgets.
@@ -25,7 +27,34 @@ public struct SharedDataManager {
         let updated = current + seconds
         sharedDefaults.set(updated, forKey: Keys.dailyMindfulSeconds)
         sharedDefaults.set(now.timeIntervalSince1970, forKey: Keys.lastSavedDate)
+
+        if seconds > 0 {
+            updateStreak(for: now)
+        }
+
         reloadWidgets()
+    }
+
+    private static func updateStreak(for date: Date) {
+        let lastStreakTimestamp = sharedDefaults.double(forKey: Keys.lastStreakDate)
+        var streak = sharedDefaults.integer(forKey: Keys.currentStreakDays)
+        if lastStreakTimestamp <= 0 || streak <= 0 {
+            streak = 1
+        } else {
+            let calendar = Calendar.current
+            let lastStart = calendar.startOfDay(for: Date(timeIntervalSince1970: lastStreakTimestamp))
+            let nowStart = calendar.startOfDay(for: date)
+            let dayDiff = calendar.dateComponents([.day], from: lastStart, to: nowStart).day ?? 0
+            if dayDiff == 0 {
+                streak = max(1, streak)
+            } else if dayDiff == 1 {
+                streak += 1
+            } else {
+                streak = 1
+            }
+        }
+        sharedDefaults.set(streak, forKey: Keys.currentStreakDays)
+        sharedDefaults.set(date.timeIntervalSince1970, forKey: Keys.lastStreakDate)
     }
 
     /// Synchronizes current user preferences to shared storage for widgets.
@@ -48,6 +77,18 @@ public struct SharedDataManager {
     public static func getDailyMindfulSeconds(for date: Date = Date()) -> Double {
         checkAndResetDailyIfNewDay(referenceDate: date)
         return sharedDefaults.double(forKey: Keys.dailyMindfulSeconds)
+    }
+
+    /// Returns the active consecutive-day streak for the given calendar day.
+    public static func getCurrentStreakDays(for date: Date = Date()) -> Int {
+        let streak = sharedDefaults.integer(forKey: Keys.currentStreakDays)
+        let lastStreakTimestamp = sharedDefaults.double(forKey: Keys.lastStreakDate)
+        guard streak > 0, lastStreakTimestamp > 0 else { return 0 }
+        let calendar = Calendar.current
+        let lastStart = calendar.startOfDay(for: Date(timeIntervalSince1970: lastStreakTimestamp))
+        let targetStart = calendar.startOfDay(for: date)
+        let dayDiff = calendar.dateComponents([.day], from: lastStart, to: targetStart).day ?? -1
+        return (dayDiff == 0 || dayDiff == 1) ? streak : 0
     }
 
     /// Returns the daily goal in minutes (default: 10 minutes).

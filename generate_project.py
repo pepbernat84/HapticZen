@@ -729,7 +729,7 @@ def create_pbxproj(team_id: str = ""):
 \t\t\t\tCURRENT_PROJECT_VERSION = 1;{build_setting_team_line}
 \t\t\t\tGENERATE_INFOPLIST_FILE = YES;
 \t\t\t\tINFOPLIST_KEY_CFBundleDisplayName = "Haptic Zen";
-\t\t\t\tINFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+\t\t\t\tINFOPLIST_FILE = "HapticZenWidgets/Info.plist";
 \t\t\t\tIPHONEOS_DEPLOYMENT_TARGET = 16.0;
 \t\t\t\tLD_RUNPATH_SEARCH_PATHS = (
 \t\t\t\t\t"$(inherited)",
@@ -754,7 +754,7 @@ def create_pbxproj(team_id: str = ""):
 \t\t\t\tCURRENT_PROJECT_VERSION = 1;{build_setting_team_line}
 \t\t\t\tGENERATE_INFOPLIST_FILE = YES;
 \t\t\t\tINFOPLIST_KEY_CFBundleDisplayName = "Haptic Zen";
-\t\t\t\tINFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+\t\t\t\tINFOPLIST_FILE = "HapticZenWidgets/Info.plist";
 \t\t\t\tIPHONEOS_DEPLOYMENT_TARGET = 16.0;
 \t\t\t\tLD_RUNPATH_SEARCH_PATHS = (
 \t\t\t\t\t"$(inherited)",

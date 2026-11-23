@@ -163,6 +163,7 @@
 		88D39D9F7ACA3C9719C19BE5 /* HapticZenWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticZenWidget.swift"; sourceTree = "<group>"; };
 		961B732618F8B999D92444BB /* HapticZenWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticZenWidgetBundle.swift"; sourceTree = "<group>"; };
 		99F0A403657480BF04BC42CC /* HapticZenWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticZenWidgetProvider.swift"; sourceTree = "<group>"; };
+		BDF570D3E5D8DB35643269FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
 		4C5CA8280EAD52521508E58D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
 		DB500D29B96A48BFDC6EC14B /* HapticZen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HapticZen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AAD396B891A9D3FC00332C4 /* HapticZenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HapticZenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +228,7 @@
 				88D39D9F7ACA3C9719C19BE5,
 				961B732618F8B999D92444BB,
 				99F0A403657480BF04BC42CC,
+				BDF570D3E5D8DB35643269FD,
 				4C5CA8280EAD52521508E58D,
 			);
 			path = HapticZenWidgets;
@@ -528,13 +530,16 @@
 				TargetAttributes = {
 					7A7FFA0CB32D0B12DF5E9767 = {
 						CreatedOnToolsVersion = 15.0;
+						DevelopmentTeam = DFMNS3SR57;
 					};
 					8B034047EF8E3806A6D4615F = {
 						CreatedOnToolsVersion = 15.0;
+						DevelopmentTeam = DFMNS3SR57;
 						TestTargetID = 7A7FFA0CB32D0B12DF5E9767;
 					};
 					96997D0498111FE390C9F667 = {
 						CreatedOnToolsVersion = 15.0;
+						DevelopmentTeam = DFMNS3SR57;
 					};
 				};
 			};
@@ -742,6 +747,7 @@
 				CODE_SIGN_ENTITLEMENTS = "HapticZen/HapticZen.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DFMNS3SR57;
 				DEVELOPMENT_ASSET_PATHS = "HapticZen/PreviewContent";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -772,6 +778,7 @@
 				CODE_SIGN_ENTITLEMENTS = "HapticZen/HapticZen.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DFMNS3SR57;
 				DEVELOPMENT_ASSET_PATHS = "HapticZen/PreviewContent";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -800,9 +807,10 @@
 				CODE_SIGN_ENTITLEMENTS = "HapticZenWidgets/HapticZenWidget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DFMNS3SR57;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Haptic Zen";
-				INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+				INFOPLIST_FILE = "HapticZenWidgets/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -825,9 +833,10 @@
 				CODE_SIGN_ENTITLEMENTS = "HapticZenWidgets/HapticZenWidget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DFMNS3SR57;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Haptic Zen";
-				INFOPLIST_KEY_NSExtension_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+				INFOPLIST_FILE = "HapticZenWidgets/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -850,6 +859,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DFMNS3SR57;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hapticzen.tests;
@@ -867,6 +877,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DFMNS3SR57;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hapticzen.tests;
